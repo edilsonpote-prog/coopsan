@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooperativa de Transporte S.A.N</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #ff711e;
+    }
+
+    /* 🛣️ CABECERA TIPO CARRETERA */
+    header {
+        background: url('carretera.jpg') center/cover no-repeat;
+        color: rgb(20, 10, 10);
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: repeating-linear-gradient(
+            to right,
+            yellow 0,
+            yellow 30px,
+            transparent 30px,
+            transparent 60px
+        ); /* 🔶 líneas tipo carretera */
+    }
+
+    header h1 {
+        font-size: 50px;
+        font-weight: 900;
+        background: linear-gradient(45deg, #fff, #d1e4ff);
+        -moz-animation-direction: text;
+        color: transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid white;
+        width: 0;
+        animation: typing 3s steps(40) forwards, blink .7s infinite;
+        text-shadow: 0px 0px 15px rgba(0,0,0,0.6);
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+
+    @keyframes blink {
+        0% { border-color: transparent; }
+        50% { border-color: white; }
+        100% { border-color: transparent; }
+    }
+
+    header p {
+        font-size: 22px;
+        margin-top: 15px;
+        text-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+    }
+
+    /* 🚍 BOTÓN DE SERVICIO ESTILO RUTA */
+    .btn-ruta {
+        margin-top: 20px;
+        padding: 12px 28px;
+        background: #ffcc00;
+        color: #1605ff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: 0.3s;
+    }
+
+    .btn-ruta:hover {
+        background: #ffdd33;
+        transform: scale(1.05);
+    }
+
+    /* 🟦 TARJETAS DE SECCIONES */
+    section {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .info-box {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        border-left: 8px solid #d85316;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+    }
+
+    h2 {
+        color: #000000;
+        font-size: 32px;
+        border-bottom: 3px solid #000000;
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+
+    /* 🚌 CUADRICULA DE EQUIPO */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .team-grid .info-box {
+        border-left: 8px solid #0d2a71;
+    }
+
+    /* 🟠 FOOTER */
+    footer {
+        background-color: #0d2a71;
+        color: white;
+        padding: 40px;
+        text-align: center;
+        margin-top: 40px;
+        font-size: 18px;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Cooperativa de Transporte S.A.N</h1>
+    <p>"Conectando vidas, kilómetros y destinos desde nuestros inicios."</p>
+    <button class="btn-ruta" onclick="window.location.href='gasolinera.html'">Servicio</button>
+</header>
+
+<section>
+    <h2>Descripción de la Empresa</h2>
+    <div class="info-box">
+        <p>La Cooperativa de Transporte S.A.N es una organización dedicada al transporte interprovincial y rural de pasajeros, comprometida con brindar un servicio seguro, eficiente y responsable. Conectamos a Naranjal con importantes destinos del país, fortaleciendo la movilidad y el desarrollo de la región.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Historia</h2>
+    <div class="info-box">
+        <p>Nacimos con un solo bus y un sueño: unir comunidades. Con el esfuerzo de socios y colaboradores, ampliamos nuestra flota, mejoramos rutas y profesionalizamos nuestros servicios para convertirnos en una de las cooperativas más representativas del cantón.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Misión</h2>
+    <div class="info-box">
+        <p>Brindar servicios de transporte confiables, seguros y accesibles, conectando a las personas con sus destinos mediante una operación responsable y orientada al bienestar del pasajero.</p>
+    </div>
+
+    <h2>Visión</h2>
+    <div class="info-box">
+        <p>Ser la cooperativa líder en transporte interprovincial del sur del país, reconocida por su innovación, calidad de servicio y compromiso con la seguridad y satisfacción del usuario.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Productos y Servicios</h2>
+    <div class="info-box">
+        <ul>
+            <li>Transporte interprovincial de pasajeros</li>
+            <li>Transporte rural y urbano (según ruta)</li>
+            <li>Envío de encomiendas</li>
+            <li>Venta de boletos en boleterías autorizadas</li>
+            <li>Atención al cliente en terminales y agencias</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Destinos Principales</h2>
+    <div class="info-box">
+        <ul>
+            <li>Naranjal – Guayaquil</li>
+            <li>Naranjal – Machala</li>
+            <li>Naranjal – Cuenca</li>
+            <li>Naranjal – Huaquillas</li>
+            <li>Rutas internas rurales</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Tarifas Referenciales</h2>
+    <div class="info-box">
+        <ul>
+            <li>Naranjal → Guayaquil: <strong>$3.00</strong></li>
+            <li>Naranjal → Machala: <strong>$4.50</strong></li>
+            <li>Naranjal → Cuenca: <strong>$6.00</strong></li>
+            <li>Encomiendas desde <strong>$1.00</strong></li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Sucursales</h2>
+    <div class="info-box">
+        <ul>
+            <li><strong>Terminal Terrestre de Naranjal</strong> – Boletería, encomiendas y atención al cliente.</li>
+            <li><strong>Agencia Guayaquil</strong> (si aplica).</li>
+            <li><strong>Agencia Machala</strong> (si aplica).</li>
+            <li><strong>Oficina Matriz</strong> – Administración general, Naranjal.</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Equipo de Trabajo</h2>
+    <div class="team-grid">
+        <div class="info-box"><strong>Presidente:</strong> Encargado de la dirección general y decisiones organizacionales.</div>
+        <div class="info-box"><strong>Gerente General:</strong> Planificación, administración y supervisión de la operación.</div>
+        <div class="info-box"><strong>Jefe Operativo:</strong> Control de flota, horarios, conductores y mantenimiento.</div>
+        <div class="info-box"><strong>Departamento Administrativo:</strong> Contabilidad, RRHH, tesorería.</div>
+        <div class="info-box"><strong>Equipo de Boleterías:</strong> Venta de pasajes, facturación y guía al usuario.</div>
+        <div class="info-box"><strong>Conductores y Asistentes:</strong> Servicio directo al pasajero durante el viaje.</div>
+    </div>
+</section>
+
+<footer>
+    <p>Cooperativa de Transporte S.A.N – Naranjal, Ecuador</p>
+    <p>Todos los derechos reservados © 2025</p>
+</footer>
+
+</body>
+</html>
