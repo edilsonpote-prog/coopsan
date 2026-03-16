@@ -18,12 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const footerContainer = document.getElementById('footer-container');
   if (footerContainer) {
     const footerHTML = `
-      <footer class="footer-coop">
-        <div class="footer-section footer-bottom">
-          <p class="copyright">Copyright © 2026 COOPERATIVA S.A.N</p>
-        </div>
-      </footer>
-    `;
+
     footerContainer.innerHTML = footerHTML;
   }
 
