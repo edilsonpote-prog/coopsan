@@ -2,29 +2,35 @@ header h1 {
     font-size: 42px;
     font-weight: 900;
     text-transform: uppercase;
-
-    /* 🎨 Degradado mejorado */
     background: linear-gradient(45deg, #0d2a71, #2f6bff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 
-    /* ✨ Animación de escritura corregida */
     white-space: nowrap;
     overflow: hidden;
     width: 0;
-    /* Usamos forwards para que se quede abierto al terminar */
-    animation: typing 3s steps(40) forwards;
+    
+    /* MODIFICACIÓN AQUÍ: */
+    /* La animación 'typing' dura 3.5s y se queda fija (forwards) */
+    /* La animación 'blink' dura 0.7s pero solo se repite 5 veces (5 * 0.7 = 3.5s) */
+    animation: 
+        typing 3.5s steps(40) forwards, 
+        blink .7s step-end 5; /* El '5' hace que se detenga al terminar de escribir */
 
-    /* 🚫 Sin bordes para que no haya línea */
-    border: none;
-    padding: 10px 0;
+    border-right: 4px solid var(--amarillo-ruta); /* Cursor inicial */
+    padding-right: 5px;
     display: inline-block;
 }
 
 /* Animación de escritura */
 @keyframes typing {
     from { width: 0; }
-    /* Cambiamos 100% por el ancho real del contenido */
-    to { width: 100%; } 
+    to { width: 100%; }
+}
+
+/* Animación del cursor que termina en transparente */
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--amarillo-ruta); }
 }
