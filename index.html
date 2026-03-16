@@ -19,61 +19,50 @@
             line-height: 1.6;
         }
 
-        /* 🛣️ CABECERA CON VIDEO CONFIGURADA */
+        /* 🛣️ CABECERA OPTIMIZADA */
         header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('carretera.jpg') center/cover no-repeat;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
             position: relative;
-            height: 80vh; /* Altura del encabezado */
-            min-height: 400px;
+            min-height: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
-            overflow: hidden; /* Corta el video excedente */
-            background-color: #000; /* Fondo de seguridad */
         }
 
-        /* El video se ajusta a todo el fondo */
-        .video-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 0;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-
-        /* Capa oscura para que el texto sea legible */
-        header::before {
+        /* Líneas de carretera en la base */
+        header::after {
             content: "";
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); 
-            z-index: 1;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                to right,
+                var(--amarillo-ruta) 0,
+                var(--amarillo-ruta) 40px,
+                transparent 40px,
+                transparent 80px
+            );
         }
 
-        /* Forzamos al contenido a estar por encima del video y la capa oscura */
-        .typing-container, header p, .btn-ruta {
-            position: relative;
-            z-index: 2;
+        .typing-container {
+            display: inline-block;
         }
 
         header h1 {
-            font-size: clamp(24px, 8vw, 50px);
+            font-size: clamp(24px, 8vw, 50px); /* Tamaño fluido */
             font-weight: 900;
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
-            width: 0;
             border-right: 4px solid var(--amarillo-ruta);
-            /* El '5' al final de blink hace que el cursor desaparezca al terminar */
-            animation: typing 3.5s steps(30) forwards, blink .7s step-end 5;
+            width: 0;
+            animation: typing 3.5s steps(30) forwards, blink .7s infinite;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
         }
 
@@ -83,8 +72,7 @@
         }
 
         @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--amarillo-ruta); }
+            50% { border-color: transparent; }
         }
 
         header p {
@@ -114,9 +102,10 @@
         .btn-ruta:hover {
             background: white;
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
-        /* 🟦 SECCIONES */
+        /* 🟦 CONTENEDORES */
         section {
             padding: 50px 20px;
             max-width: 1100px;
@@ -130,6 +119,11 @@
             margin-bottom: 30px;
             border-left: 10px solid var(--azul-coop);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: scale(1.01);
         }
 
         h2 {
@@ -142,10 +136,38 @@
             margin-bottom: 20px;
         }
 
-        ul { list-style: none; padding: 0; }
-        ul li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        ul li::before { content: "🚌 "; margin-right: 10px; }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
+        ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        ul li::before {
+            content: "🚌 ";
+            margin-right: 10px;
+        }
+
+        /* 🚌 EQUIPO */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .team-grid .info-box {
+            border-left-color: var(--amarillo-ruta);
+            margin-bottom: 0;
+        }
+
+        /* 🟠 FOOTER */
         footer {
             background-color: #111;
             color: #aaa;
@@ -153,16 +175,16 @@
             text-align: center;
             border-top: 5px solid var(--amarillo-ruta);
         }
+
+        footer strong {
+            color: white;
+        }
+
     </style>
 </head>
 <body>
 
 <header>
-    <video autoplay muted loop playsinline class="video-bg">
-        <source src="video.mp4" type="video/mp4">
-        Tu navegador no soporta video.
-    </video>
-
     <div class="typing-container">
         <h1>Cooperativa de Transporte S.A.N</h1>
     </div>
@@ -173,7 +195,47 @@
 <section>
     <h2>Sobre Nosotros</h2>
     <div class="info-box">
-        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural. Conectamos a Naranjal con los principales puntos estratégicos del Ecuador.</p>
+        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural. Conectamos a Naranjal con los principales puntos estratégicos del Ecuador, garantizando seguridad y puntualidad en cada viaje.</p>
+    </div>
+
+    <h2>Nuestra Historia</h2>
+    <div class="info-box">
+        <p>Iniciamos con una visión clara: servir al pueblo. Lo que empezó con una unidad, hoy es una flota moderna gracias a la confianza de nuestros socios y la lealtad de nuestros pasajeros en Naranjal.</p>
+    </div>
+</section>
+
+<section style="background: rgba(255,255,255,0.1); border-radius: 30px; margin-bottom: 40px;">
+    <h2>Misión y Visión</h2>
+    <div class="team-grid">
+        <div class="info-box">
+            <h3>Misión</h3>
+            <p>Brindar transporte confiable y seguro, conectando familias y negocios con una operación orientada al bienestar del pasajero.</p>
+        </div>
+        <div class="info-box">
+            <h3>Visión</h3>
+            <p>Ser la cooperativa referente en el sur del país, innovando en flota y tecnología para la mejor experiencia de viaje.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Destinos y Tarifas</h2>
+    <div class="info-box">
+        <ul>
+            <li>Naranjal ↔ Guayaquil: <strong>$3.00</strong></li>
+            <li>Naranjal ↔ Machala: <strong>$4.50</strong></li>
+            <li>Naranjal ↔ Cuenca: <strong>$6.00</strong></li>
+            <li>Encomiendas nacionales desde: <strong>$1.00</strong></li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Nuestro Equipo</h2>
+    <div class="team-grid">
+        <div class="info-box"><strong>Gerencia:</strong> Planificación estratégica y administrativa.</div>
+        <div class="info-box"><strong>Operaciones:</strong> Control de rutas y mantenimiento de flota.</div>
+        <div class="info-box"><strong>Atención:</strong> Venta de boletos y auxilio al pasajero.</div>
     </div>
 </section>
 
