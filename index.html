@@ -4,239 +4,246 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cooperativa de Transporte S.A.N</title>
-    <link rel="stylesheet" href="estilo.css">
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #ff711e;
-    }
+        :root {
+            --naranja-coop: #ff711e;
+            --azul-coop: #0d2a71;
+            --amarillo-ruta: #ffcc00;
+        }
 
-    /* 🛣️ CABECERA TIPO CARRETERA */
-    header {
-        background: url('carretera.jpg') center/cover no-repeat;
-        color: rgb(20, 10, 10);
-        padding: 80px 20px;
-        text-align: center;
-        position: relative;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: var(--naranja-coop);
+            color: #333;
+            line-height: 1.6;
+        }
 
-    header::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 8px;
-        background: repeating-linear-gradient(
-            to right,
-            yellow 0,
-            yellow 30px,
-            transparent 30px,
-            transparent 60px
-        ); /* 🔶 líneas tipo carretera */
-    }
+        /* 🛣️ CABECERA OPTIMIZADA */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('carretera.jpg') center/cover no-repeat;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    header h1 {
-        font-size: 50px;
-        font-weight: 900;
-        background: linear-gradient(45deg, #fff, #d1e4ff);
-        -webkit-background-clip: text;
-        color: transparent;
-        white-space: nowrap;
-        overflow: hidden;
-        border-right: 3px solid white;
-        width: 0;
-        animation: typing 3s steps(40) forwards, blink .7s infinite;
-        text-shadow: 0px 0px 15px rgba(0,0,0,0.6);
-    }
+        /* Líneas de carretera en la base */
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                to right,
+                var(--amarillo-ruta) 0,
+                var(--amarillo-ruta) 40px,
+                transparent 40px,
+                transparent 80px
+            );
+        }
 
-    @keyframes typing {
-        from { width: 0; }
-        to { width: 100%; }
-    }
+        .typing-container {
+            display: inline-block;
+        }
 
-    @keyframes blink {
-        0% { border-color: transparent; }
-        50% { border-color: white; }
-        100% { border-color: transparent; }
-    }
+        header h1 {
+            font-size: clamp(24px, 8vw, 50px); /* Tamaño fluido */
+            font-weight: 900;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid var(--amarillo-ruta);
+            width: 0;
+            animation: typing 3.5s steps(30) forwards, blink .7s infinite;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
 
-    header p {
-        font-size: 22px;
-        margin-top: 15px;
-        text-shadow: 0px 0px 10px rgba(0,0,0,0.6);
-    }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
 
-    /* 🚍 BOTÓN DE SERVICIO ESTILO RUTA */
-    .btn-ruta {
-        margin-top: 20px;
-        padding: 12px 28px;
-        background: #ffcc00;
-        color: #1605ff;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        transition: 0.3s;
-    }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
 
-    .btn-ruta:hover {
-        background: #ffdd33;
-        transform: scale(1.05);
-    }
+        header p {
+            font-size: clamp(16px, 4vw, 22px);
+            margin-top: 15px;
+            max-width: 800px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
 
-    /* 🟦 TARJETAS DE SECCIONES */
-    section {
-        padding: 40px 20px;
-        max-width: 1200px;
-        margin: auto;
-    }
+        /* 🚍 BOTÓN */
+        .btn-ruta {
+            margin-top: 25px;
+            padding: 15px 35px;
+            background: var(--amarillo-ruta);
+            color: var(--azul-coop);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-    .info-box {
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        margin-bottom: 20px;
-        border-left: 8px solid #d85316;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        font-size: 18px;
-    }
+        .btn-ruta:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
 
-    h2 {
-        color: #000000;
-        font-size: 32px;
-        border-bottom: 3px solid #000000;
-        display: inline-block;
-        padding-bottom: 5px;
-    }
+        /* 🟦 CONTENEDORES */
+        section {
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
 
-    /* 🚌 CUADRICULA DE EQUIPO */
-    .team-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-    }
+        .info-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 10px solid var(--azul-coop);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
 
-    .team-grid .info-box {
-        border-left: 8px solid #0d2a71;
-    }
+        .info-box:hover {
+            transform: scale(1.01);
+        }
 
-    /* 🟠 FOOTER */
-    footer {
-        background-color: #0d2a71;
-        color: white;
-        padding: 40px;
-        text-align: center;
-        margin-top: 40px;
-        font-size: 18px;
-    }
-</style>
+        h2 {
+            color: white;
+            font-size: 28px;
+            background: var(--azul-coop);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        ul li::before {
+            content: "🚌 ";
+            margin-right: 10px;
+        }
+
+        /* 🚌 EQUIPO */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .team-grid .info-box {
+            border-left-color: var(--amarillo-ruta);
+            margin-bottom: 0;
+        }
+
+        /* 🟠 FOOTER */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 5px solid var(--amarillo-ruta);
+        }
+
+        footer strong {
+            color: white;
+        }
+
+    </style>
 </head>
 <body>
 
 <header>
-    <h1>Cooperativa de Transporte S.A.N</h1>
+    <div class="typing-container">
+        <h1>Cooperativa de Transporte S.A.N</h1>
+    </div>
     <p>"Conectando vidas, kilómetros y destinos desde nuestros inicios."</p>
-    <button class="btn-ruta" onclick="window.location.href='gasolinera.html'">Servicio</button>
+    <a href="gasolinera.html" class="btn-ruta">Ver Servicios</a>
 </header>
 
 <section>
-    <h2>Descripción de la Empresa</h2>
+    <h2>Sobre Nosotros</h2>
     <div class="info-box">
-        <p>La Cooperativa de Transporte S.A.N es una organización dedicada al transporte interprovincial y rural de pasajeros, comprometida con brindar un servicio seguro, eficiente y responsable. Conectamos a Naranjal con importantes destinos del país, fortaleciendo la movilidad y el desarrollo de la región.</p>
+        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural. Conectamos a Naranjal con los principales puntos estratégicos del Ecuador, garantizando seguridad y puntualidad en cada viaje.</p>
+    </div>
+
+    <h2>Nuestra Historia</h2>
+    <div class="info-box">
+        <p>Iniciamos con una visión clara: servir al pueblo. Lo que empezó con una unidad, hoy es una flota moderna gracias a la confianza de nuestros socios y la lealtad de nuestros pasajeros en Naranjal.</p>
     </div>
 </section>
 
-<section>
-    <h2>Historia</h2>
-    <div class="info-box">
-        <p>Nacimos con un solo bus y un sueño: unir comunidades. Con el esfuerzo de socios y colaboradores, ampliamos nuestra flota, mejoramos rutas y profesionalizamos nuestros servicios para convertirnos en una de las cooperativas más representativas del cantón.</p>
-    </div>
-</section>
-
-<section>
-    <h2>Misión</h2>
-    <div class="info-box">
-        <p>Brindar servicios de transporte confiables, seguros y accesibles, conectando a las personas con sus destinos mediante una operación responsable y orientada al bienestar del pasajero.</p>
-    </div>
-
-    <h2>Visión</h2>
-    <div class="info-box">
-        <p>Ser la cooperativa líder en transporte interprovincial del sur del país, reconocida por su innovación, calidad de servicio y compromiso con la seguridad y satisfacción del usuario.</p>
-    </div>
-</section>
-
-<section>
-    <h2>Productos y Servicios</h2>
-    <div class="info-box">
-        <ul>
-            <li>Transporte interprovincial de pasajeros</li>
-            <li>Transporte rural y urbano (según ruta)</li>
-            <li>Envío de encomiendas</li>
-            <li>Venta de boletos en boleterías autorizadas</li>
-            <li>Atención al cliente en terminales y agencias</li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Destinos Principales</h2>
-    <div class="info-box">
-        <ul>
-            <li>Naranjal – Guayaquil</li>
-            <li>Naranjal – Milagro</li>
-            <li>Guayaquil – Naranjal</li>
-            <li>Milagro – Naranjal</li>
-            <li>Rutas internas rurales</li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Tarifas Referenciales</h2>
-    <div class="info-box">
-        <ul>
-            <li>Naranjal → Guayaquil: <strong>$3.50</strong></li>
-            <li>Naranjal → Milagro: <strong>$2.60</strong></li>
-            <li>Encomiendas desde <strong>$1.00</strong></li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Sucursales</h2>
-    <div class="info-box">
-        <ul>
-            <li><strong>Terminal Terrestre de Naranjal</strong> – Boletería, encomiendas y atención al cliente.</li>
-            <li><strong>Agencia Guayaquil</strong> (si aplica).</li>
-            <li><strong>Agencia Milagro</strong> (si aplica).</li>
-            <li><strong>Oficina Matriz</strong> – Administración general, Naranjal.</li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Equipo de Trabajo</h2>
+<section style="background: rgba(255,255,255,0.1); border-radius: 30px; margin-bottom: 40px;">
+    <h2>Misión y Visión</h2>
     <div class="team-grid">
-        <div class="info-box"><strong>Presidente:</strong> Encargado de la dirección general y decisiones organizacionales.</div>
-        <div class="info-box"><strong>Gerente General:</strong> Planificación, administración y supervisión de la operación.</div>
-        <div class="info-box"><strong>Jefe Operativo:</strong> Control de flota, horarios, conductores y mantenimiento.</div>
-        <div class="info-box"><strong>Departamento Administrativo:</strong> Contabilidad, RRHH, tesorería.</div>
-        <div class="info-box"><strong>Equipo de Boleterías:</strong> Venta de pasajes, facturación y guía al usuario.</div>
-        <div class="info-box"><strong>Conductores y Asistentes:</strong> Servicio directo al pasajero durante el viaje.</div>
+        <div class="info-box">
+            <h3>Misión</h3>
+            <p>Brindar transporte confiable y seguro, conectando familias y negocios con una operación orientada al bienestar del pasajero.</p>
+        </div>
+        <div class="info-box">
+            <h3>Visión</h3>
+            <p>Ser la cooperativa referente en el sur del país, innovando en flota y tecnología para la mejor experiencia de viaje.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Destinos y Tarifas</h2>
+    <div class="info-box">
+        <ul>
+            <li>Naranjal ↔ Guayaquil: <strong>$3.00</strong></li>
+            <li>Naranjal ↔ Machala: <strong>$4.50</strong></li>
+            <li>Naranjal ↔ Cuenca: <strong>$6.00</strong></li>
+            <li>Encomiendas nacionales desde: <strong>$1.00</strong></li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Nuestro Equipo</h2>
+    <div class="team-grid">
+        <div class="info-box"><strong>Gerencia:</strong> Planificación estratégica y administrativa.</div>
+        <div class="info-box"><strong>Operaciones:</strong> Control de rutas y mantenimiento de flota.</div>
+        <div class="info-box"><strong>Atención:</strong> Venta de boletos y auxilio al pasajero.</div>
     </div>
 </section>
 
 <footer>
-    <p>Cooperativa de Transporte S.A.N – Naranjal, Ecuador</p>
-    <p>Todos los derechos reservados © 2025</p>
+    <p><strong>Cooperativa de Transporte S.A.N</strong><br>
+    Terminal Terrestre de Naranjal, Ecuador</p>
+    <p>© 2026 - Todos los derechos reservados</p>
 </footer>
 
 </body>
 </html>
-
-
-
