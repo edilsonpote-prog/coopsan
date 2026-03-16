@@ -23,17 +23,16 @@
         header {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('carretera.jpg') center/cover no-repeat;
             color: white;
-            padding: 100px 20px;
+            padding: 80px 20px;
             text-align: center;
             position: relative;
-            min-height: 300px;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* Líneas de carretera en la base */
         header::after {
             content: "";
             position: absolute;
@@ -52,10 +51,11 @@
 
         .typing-container {
             display: inline-block;
+            margin-bottom: 20px;
         }
 
         header h1 {
-            font-size: clamp(24px, 8vw, 50px); /* Tamaño fluido */
+            font-size: clamp(24px, 8vw, 50px);
             font-weight: 900;
             margin: 0;
             white-space: nowrap;
@@ -73,6 +73,18 @@
 
         @keyframes blink {
             50% { border-color: transparent; }
+        }
+
+        /* 🎬 ESTILO DEL VIDEO */
+        .video-wrapper {
+            width: 100%;
+            max-width: 650px;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 3px solid rgba(255,255,255,0.2);
+            background: #000;
         }
 
         header p {
@@ -119,11 +131,6 @@
             margin-bottom: 30px;
             border-left: 10px solid var(--azul-coop);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .info-box:hover {
-            transform: scale(1.01);
         }
 
         h2 {
@@ -136,38 +143,17 @@
             margin-bottom: 20px;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        ul li:last-child {
-            border-bottom: none;
-        }
-
         ul li::before {
             content: "🚌 ";
             margin-right: 10px;
         }
 
-        /* 🚌 EQUIPO */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
-        .team-grid .info-box {
-            border-left-color: var(--amarillo-ruta);
-            margin-bottom: 0;
-        }
-
-        /* 🟠 FOOTER */
         footer {
             background-color: #111;
             color: #aaa;
@@ -175,11 +161,6 @@
             text-align: center;
             border-top: 5px solid var(--amarillo-ruta);
         }
-
-        footer strong {
-            color: white;
-        }
-
     </style>
 </head>
 <body>
@@ -188,6 +169,14 @@
     <div class="typing-container">
         <h1>Cooperativa de Transporte S.A.N</h1>
     </div>
+
+    <div class="video-wrapper">
+        <video width="100%" controls>
+            <source src="video coop.mp4" type="video/mp4">
+            Tu navegador no soporta el video.
+        </video>
+    </div>
+
     <p>"Conectando vidas, kilómetros y destinos desde nuestros inicios."</p>
     <a href="gasolinera.html" class="btn-ruta">Ver Servicios</a>
 </header>
@@ -215,27 +204,6 @@
             <h3>Visión</h3>
             <p>Ser la cooperativa referente en el sur del país, innovando en flota y tecnología para la mejor experiencia de viaje.</p>
         </div>
-    </div>
-</section>
-
-<section>
-    <h2>Destinos y Tarifas</h2>
-    <div class="info-box">
-        <ul>
-            <li>Naranjal ↔ Guayaquil: <strong>$3.00</strong></li>
-            <li>Naranjal ↔ Machala: <strong>$4.50</strong></li>
-            <li>Naranjal ↔ Cuenca: <strong>$6.00</strong></li>
-            <li>Encomiendas nacionales desde: <strong>$1.00</strong></li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Nuestro Equipo</h2>
-    <div class="team-grid">
-        <div class="info-box"><strong>Gerencia:</strong> Planificación estratégica y administrativa.</div>
-        <div class="info-box"><strong>Operaciones:</strong> Control de rutas y mantenimiento de flota.</div>
-        <div class="info-box"><strong>Atención:</strong> Venta de boletos y auxilio al pasajero.</div>
     </div>
 </section>
 
