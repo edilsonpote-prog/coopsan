@@ -1,7 +1,53 @@
+header {
+    position: relative;
+    height: 80vh; 
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    /* Eliminamos el background anterior para que no tape el video */
+    background: black; 
+}
+
+/* El video debe ir atrás de todo */
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* Capa oscura para que el texto resalte sobre el video */
+header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+}
+
+/* El contenedor del título debe estar arriba (z-index 2) */
+.typing-container, header p, .btn-ruta {
+    position: relative;
+    z-index: 2;
+}
+
 header h1 {
     font-size: 42px;
     font-weight: 900;
     text-transform: uppercase;
+    
+    /* Degradado del texto */
     background: linear-gradient(45deg, #0d2a71, #2f6bff);
     -webkit-background-clip: text;
     background-clip: text;
@@ -11,25 +57,21 @@ header h1 {
     overflow: hidden;
     width: 0;
     
-    /* MODIFICACIÓN AQUÍ: */
-    /* La animación 'typing' dura 3.5s y se queda fija (forwards) */
-    /* La animación 'blink' dura 0.7s pero solo se repite 5 veces (5 * 0.7 = 3.5s) */
+    /* Animación corregida: el 5 hace que el cursor se detenga */
     animation: 
         typing 3.5s steps(40) forwards, 
-        blink .7s step-end 5; /* El '5' hace que se detenga al terminar de escribir */
+        blink .7s step-end 5; 
 
-    border-right: 4px solid var(--amarillo-ruta); /* Cursor inicial */
+    border-right: 4px solid var(--amarillo-ruta);
     padding-right: 5px;
     display: inline-block;
 }
 
-/* Animación de escritura */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
 }
 
-/* Animación del cursor que termina en transparente */
 @keyframes blink {
     from, to { border-color: transparent; }
     50% { border-color: var(--amarillo-ruta); }
