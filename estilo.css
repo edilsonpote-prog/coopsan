@@ -3,27 +3,28 @@ header h1 {
     font-weight: 900;
     text-transform: uppercase;
 
-    /* 🎨 Degradado */
+    /* 🎨 Degradado mejorado */
     background: linear-gradient(45deg, #0d2a71, #2f6bff);
     -webkit-background-clip: text;
-    background-clip: text; /* Compatibilidad estándar */
+    background-clip: text;
     color: transparent;
 
     /* ✨ Animación de escritura corregida */
     white-space: nowrap;
     overflow: hidden;
     width: 0;
-    /* Cambié 0s por 3s para que se vea el efecto */
+    /* Usamos forwards para que se quede abierto al terminar */
     animation: typing 3s steps(40) forwards;
 
+    /* 🚫 Sin bordes para que no haya línea */
     border: none;
-    padding: 10px 0; /* Un poco de padding para que no se corten las sombras */
+    padding: 10px 0;
     display: inline-block;
 }
 
 /* Animación de escritura */
 @keyframes typing {
     from { width: 0; }
-    /* Se usa max-content para que el ancho sea exacto al texto */
+    /* Cambiamos 100% por el ancho real del contenido */
     to { width: 100%; } 
 }
