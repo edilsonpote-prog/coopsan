@@ -5,12 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
   if (header) {
     const toggle = document.createElement("button");
-    toggle.innerHTML = "☰"; // Usamos innerHTML por si quieres poner un icono luego
+    toggle.innerHTML = "☰"; 
     toggle.classList.add("menu-toggle");
     header.prepend(toggle);
 
     toggle.addEventListener("click", () => {
-      // Asegúrate de tener la clase .nav-links en tu HTML o cámbialo aquí
       if (nav) nav.classList.toggle("active");
     });
   }
@@ -77,5 +76,26 @@ document.addEventListener("DOMContentLoaded", () => {
       </footer>
     `;
     footerContainer.innerHTML = footerHTML;
+  }
+
+  // --- 3. CONTROL DE VIDEO Y AUDIO (NUEVO) ---
+  const video = document.getElementById('videoFondo');
+  const btnAudio = document.getElementById('audioToggle');
+
+  if (video && btnAudio) {
+    // El video inicia silenciado para que el navegador permita el Autoplay
+    video.muted = true;
+
+    btnAudio.addEventListener('click', () => {
+      if (video.muted) {
+        video.muted = false;
+        btnAudio.innerHTML = "🔊"; // Icono cuando hay sonido
+        btnAudio.style.backgroundColor = "rgba(255, 113, 30, 0.8)"; // Cambia a naranja al activar
+      } else {
+        video.muted = true;
+        btnAudio.innerHTML = "🔇"; // Icono cuando está silenciado
+        btnAudio.style.backgroundColor = "rgba(0, 0, 0, 0.6)"; // Vuelve a negro
+      }
+    });
   }
 });
