@@ -17,22 +17,57 @@
             background: var(--naranja-coop);
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden; /* Evita scrolls horizontales raros */
         }
 
-        /* 🛣️ CABECERA OPTIMIZADA */
+        /* 🛣️ NUEVA CABECERA CON VIDEO DE FONDO 🎬 */
         header {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('carretera.jpg') center/cover no-repeat;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-            min-height: 400px;
+            position: relative; /* Importante para el posicionamiento del video y el texto */
+            width: 100%;
+            height: 100vh; /* Ocupa todo el alto de la pantalla */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            overflow: hidden; /* Oculta cualquier parte del video que sobresalga */
         }
 
+        /* El video de fondo */
+        header video.background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1; /* Por detrás de todo */
+            transform: translate(-50%, -50%); /* Lo centra perfectamente */
+            object-fit: cover; /* Hace que el video cubra todo el espacio sin deformarse */
+        }
+
+        /* Capa de superposición para asegurar que el texto sea legible */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Capa negra semi-transparente */
+            z-index: 2; /* Por encima del video, por debajo del texto */
+        }
+
+        /* Contenedor del contenido (texto, botón) para el z-index */
+        header .header-content {
+            position: relative;
+            z-index: 3; /* Por encima de la superposición y el video */
+            color: white;
+            padding: 20px;
+        }
+
+        /* Líneas de carretera en la base - movido para que no flote sobre el video */
         header::after {
             content: "";
             position: absolute;
@@ -47,6 +82,7 @@
                 transparent 40px,
                 transparent 80px
             );
+            z-index: 4; /* Sobre todo, en la base */
         }
 
         .typing-container {
@@ -55,7 +91,7 @@
         }
 
         header h1 {
-            font-size: clamp(24px, 8vw, 50px);
+            font-size: clamp(28px, 9vw, 60px); /* Tamaño fluido, un poco más grande */
             font-weight: 900;
             margin: 0;
             white-space: nowrap;
@@ -75,20 +111,8 @@
             50% { border-color: transparent; }
         }
 
-        /* 🎬 ESTILO DEL VIDEO */
-        .video-wrapper {
-            width: 100%;
-            max-width: 650px;
-            margin: 20px 0;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            border: 3px solid rgba(255,255,255,0.2);
-            background: #000;
-        }
-
         header p {
-            font-size: clamp(16px, 4vw, 22px);
+            font-size: clamp(18px, 5vw, 24px); /* Un poco más grande */
             margin-top: 15px;
             max-width: 800px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
@@ -96,8 +120,8 @@
 
         /* 🚍 BOTÓN */
         .btn-ruta {
-            margin-top: 25px;
-            padding: 15px 35px;
+            margin-top: 30px;
+            padding: 15px 40px;
             background: var(--amarillo-ruta);
             color: var(--azul-coop);
             border: none;
@@ -117,9 +141,9 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
-        /* 🟦 CONTENEDORES */
+        /* 🟦 CONTENEDORES - (Se mantienen igual) */
         section {
-            padding: 50px 20px;
+            padding: 80px 20px; /* Un poco más de padding superior */
             max-width: 1100px;
             margin: auto;
         }
@@ -166,19 +190,18 @@
 <body>
 
 <header>
-    <div class="typing-container">
-        <h1>Cooperativa de Transporte S.A.N</h1>
-    </div>
+    <video autoplay muted loop playsinline class="background-video">
+        <source src="video coop.mp4" type="video/mp4">
+        Tu navegador no soporta el video de fondo.
+    </video>
 
-    <div class="video-wrapper">
-        <video width="100%" controls>
-            <source src="video coop.mp4" type="video/mp4">
-            Tu navegador no soporta el video.
-        </video>
+    <div class="header-content">
+        <div class="typing-container">
+            <h1>Cooperativa de Transporte S.A.N</h1>
+        </div>
+        <p>"Conectando vidas, kilómetros y destinos desde nuestros inicios."</p>
+        <a href="gasolinera.html" class="btn-ruta">Ver Servicios</a>
     </div>
-
-    <p>"Conectando vidas, kilómetros y destinos desde nuestros inicios."</p>
-    <a href="gasolinera.html" class="btn-ruta">Ver Servicios</a>
 </header>
 
 <section>
