@@ -3,29 +3,27 @@ header h1 {
     font-weight: 900;
     text-transform: uppercase;
 
-    /* 🎨 Degradado arreglado */
-    background: linear-gradient(42deg, #0d2a71, #2f6bff);
+    /* 🎨 Degradado */
+    background: linear-gradient(45deg, #0d2a71, #2f6bff);
     -webkit-background-clip: text;
-    background-clip: text; /* Añadido para mejor compatibilidad */
+    background-clip: text; /* Compatibilidad estándar */
     color: transparent;
 
-    /* ✨ Animación de escritura corregida (cambiado de 0s a 3s) */
+    /* ✨ Animación de escritura corregida */
     white-space: nowrap;
     overflow: hidden;
     width: 0;
-    animation: typing 3s steps(40) forwards; /* 3 segundos para que se note el efecto */
+    /* Cambié 0s por 3s para que se vea el efecto */
+    animation: typing 3s steps(40) forwards;
 
     border: none;
-    padding: 0;
+    padding: 10px 0; /* Un poco de padding para que no se corten las sombras */
     display: inline-block;
 }
 
-/* 📱 Ajuste vital para Celulares */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 24px; /* Tamaño menor para pantallas táctiles */
-        white-space: normal; /* Permite que el texto se ajuste al ancho del celular */
-        width: 100%;
-        animation: none; /* En celular es mejor quitar la animación para evitar cortes */
-    }
+/* Animación de escritura */
+@keyframes typing {
+    from { width: 0; }
+    /* Se usa max-content para que el ancho sea exacto al texto */
+    to { width: 100%; } 
 }
