@@ -51,26 +51,34 @@ header h1 {
     font-size: clamp(24px, 8vw, 50px);
     font-weight: 900;
     text-transform: uppercase;
-    color: white; /* Color blanco puro para resaltar sobre el video */
-    
+    color: white;
     white-space: nowrap;
     overflow: hidden;
     
-    /* El cursor (borde derecho) */
-    border-right: 4px solid var(--amarillo-ruta);
-    padding-right: 5px; 
-
-    /* ESTO ES LO QUE ARREGLA EL CURSOR Y EL CENTRADO */
-    display: table;   /* Ajusta el ancho exacto al texto */
-    margin: 0 auto;    /* Centra el bloque en la pantalla */
-    width: 0;         
+    /* --- EL SECRETO DEL CURSOR --- */
+    display: table;           /* Hace que el borde se pegue al texto */
+    margin: 0 auto;           /* Mantiene el título centrado */
+    border-right: 4px solid var(--amarillo-ruta); /* El cursor */
+    padding-right: 5px;       /* Espacio mínimo para el cursor */
+    width: 0;                 /* Inicio de la animación */
     
+    /* --- ANIMACIONES --- */
     animation: 
         typing 3.5s steps(30) forwards, 
-        blink .7s infinite;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        blink .7s step-end 5 forwards; /* El '5' hace que parpadee 5 veces y luego ejecute 'forwards' */
 }
 
+/* Animación del parpadeo que termina en transparente */
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--amarillo-ruta); }
+}
+
+/* Ajuste de typing para que no rompa el display table */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
 /* Estilo para la frase (p) */
 header p {
     margin: 20px auto;
