@@ -4,12 +4,12 @@ header {
     min-height: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Centra horizontalmente el contenido */
+    justify-content: center; /* Centra verticalmente el contenido */
     overflow: hidden;
     color: white;
-    /* Eliminamos el background anterior para que no tape el video */
     background: black; 
+    text-align: center; /* Asegura que el texto interno esté centrado */
 }
 
 /* El video debe ir atrás de todo */
@@ -26,7 +26,7 @@ header {
     object-fit: cover;
 }
 
-/* Capa oscura para que el texto resalte sobre el video */
+/* Capa oscura */
 header::before {
     content: "";
     position: absolute;
@@ -36,10 +36,11 @@ header::before {
     z-index: 1;
 }
 
-/* El contenedor del título debe estar arriba (z-index 2) */
-.typing-container, header p, .btn-ruta {
+/* Contenedor del contenido (Título, P, Botón) */
+.header-content {
     position: relative;
     z-index: 2;
+    width: 100%; /* Ocupa todo el ancho para que el margin auto funcione */
 }
 
 header h1 {
@@ -55,22 +56,30 @@ header h1 {
 
     white-space: nowrap;
     overflow: hidden;
-    width: 0;
     
-    /* Animación corregida: el 5 hace que el cursor se detenga */
+    /* --- AJUSTES PARA CENTRAR --- */
+    display: block;        /* Cambiado de inline-block a block */
+    margin: 0 auto;        /* Esto centra el bloque del título */
+    width: 0;              /* Empieza en 0 para la animación */
+    max-content: fit-content; 
+    /* ---------------------------- */
+    
     animation: 
         typing 3.5s steps(40) forwards, 
         blink .7s step-end 5; 
 
     border-right: 4px solid var(--amarillo-ruta);
     padding-right: 5px;
-    display: inline-block;
 }
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 100%; }
+    /* Usamos ch o un porcentaje fijo para que no se estire de más */
+    to { width: 100%; } 
 }
+
+/* Si ves que el título se estira demasiado a lo ancho, 
+   puedes meter el H1 dentro de un div con un max-width */
 
 @keyframes blink {
     from, to { border-color: transparent; }
