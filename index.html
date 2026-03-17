@@ -31,7 +31,7 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
-            background: black; /* Fondo de seguridad */
+            background: black; 
         }
 
         header video.background-video {
@@ -47,7 +47,6 @@
             object-fit: cover;
         }
 
-        /* Capa oscura para legibilidad */
         header::before {
             content: '';
             position: absolute;
@@ -56,7 +55,6 @@
             z-index: 2;
         }
 
-        /* Contenedor de contenido centralizado */
         .header-content {
             position: relative;
             z-index: 3;
@@ -69,22 +67,29 @@
             align-items: center;
         }
 
+        /* ✍️ TÍTULO CORREGIDO (Blanco y Cursor Pegado) */
         header h1 {
-            font-size: clamp(28px, 6vw, 42px);
+            font-size: clamp(28px, 6vw, 55px);
             font-weight: 900;
             text-transform: uppercase;
-            background: linear-gradient(45deg, #ffffff, #2f6bff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: white; /* Color blanco corregido */
             white-space: nowrap;
             overflow: hidden;
-            border-right: 4px solid var(--amarillo-ruta);
+            
+            /* Control del cursor */
             display: block;
             margin: 0 auto;
-            width: 0;
-            animation: typing 3.5s steps(30) forwards, blink .7s infinite;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            width: fit-content; 
+            max-width: 0; 
+            border-right: 4px solid var(--amarillo-ruta);
+            padding-right: 8px;
+
+            /* Animación: Escribe y el cursor desaparece al final */
+            animation: 
+                typing 3.5s steps(30) forwards, 
+                blink .7s step-end 6 forwards; 
+            
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
         }
 
         header p {
@@ -94,7 +99,7 @@
             font-style: italic;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
             opacity: 0;
-            animation: fadeIn 1.5s ease-out 3.5s forwards;
+            animation: fadeIn 1.2s ease-out 3.5s forwards;
         }
 
         /* 🔊 BOTÓN DE AUDIO */
@@ -107,15 +112,13 @@
             color: white;
             border: 2px solid white;
             border-radius: 50%;
-            width: 55px;
-            height: 55px;
+            width: 55px; height: 55px;
             cursor: pointer;
             font-size: 22px;
-            transition: all 0.4s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            outline: none;
+            transition: 0.3s;
         }
 
         #audioToggle.active {
@@ -125,7 +128,7 @@
 
         /* 🚍 BOTÓN DE ACCIÓN */
         .btn-ruta {
-            margin-top: 10px;
+            margin-top: 15px;
             padding: 15px 40px;
             background: var(--amarillo-ruta);
             color: var(--azul-coop);
@@ -136,7 +139,7 @@
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             opacity: 0;
-            animation: fadeIn 1.5s ease-out 4s forwards;
+            animation: fadeIn 1.2s ease-out 4s forwards;
         }
 
         .btn-ruta:hover {
@@ -144,12 +147,8 @@
             transform: translateY(-3px);
         }
 
-        /* 🟦 SECCIONES DE INFORMACIÓN */
-        section {
-            padding: 80px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
+        /* 🟦 SECCIONES */
+        section { padding: 70px 20px; max-width: 1100px; margin: auto; }
 
         .info-box {
             background: white;
@@ -175,24 +174,28 @@
             gap: 20px;
         }
 
-        ul { list-style: none; padding: 0; }
-        ul li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        ul li::before { content: "🚌 "; margin-right: 10px; }
-
-        /* 🟠 FOOTER */
+        /* 🟠 FOOTER ÚNICO */
         footer {
             background-color: #111;
             color: #fff;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             border-top: 5px solid var(--amarillo-ruta);
         }
 
-        /* ANIMACIONES */
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink { 50% { border-color: transparent; } }
+        /* 🔄 ANIMACIONES ACTUALIZADAS */
+        @keyframes typing {
+            from { max-width: 0; }
+            to { max-width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: var(--amarillo-ruta); }
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
