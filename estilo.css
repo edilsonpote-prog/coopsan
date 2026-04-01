@@ -4,15 +4,16 @@ header {
     min-height: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center;    /* Centra horizontalmente */
-    justify-content: center;   /* Centra verticalmente */
+    align-items: flex-start;    /* MODIFICADO: De center a flex-start */
+    justify-content: center;   
     overflow: hidden;
     color: white;
     background: black; 
-    text-align: center;
+    text-align: left;           /* MODIFICADO: De center a left */
+    padding-left: 5%;           /* AÑADIDO: Espacio para que no pegue al borde */
 }
 
-/* El video de fondo */
+/* El video de fondo se queda igual */
 .video-bg {
     position: absolute;
     top: 50%;
@@ -26,13 +27,12 @@ header {
     object-fit: cover;
 }
 
-/* Capa oscura para legibilidad */
 header::before {
     content: "";
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Un poco más oscuro para que resalte el texto */
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
 }
 
@@ -44,63 +44,51 @@ header::before {
     max-width: 1200px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Asegura que todo hijo directo se centre */
+    align-items: flex-start;   /* MODIFICADO: Alinea el contenido a la izquierda */
 }
 
 header h1 {
     font-size: clamp(24px, 8vw, 50px);
     font-weight: 900;
     text-transform: uppercase;
-    color: white; /* Mantenemos el color blanco */
+    color: white;
     white-space: nowrap;
     overflow: hidden;
     
-    /* --- CONTROL TOTAL DEL CURSOR --- */
     display: block;
-    margin: 0 auto;
-    width: fit-content; /* Obliga al bloque a medir solo lo que mide el texto */
-    max-width: 0;       /* Empezamos la animación desde 0 ancho */
+    margin: 0;                 /* MODIFICADO: Quitamos el 'auto' que lo centraba */
+    width: fit-content;
+    max-width: 0;        
     
     border-right: 4px solid var(--amarillo-ruta);
     padding-right: 5px; 
     
-    /* Animación: el cursor parpadea y luego se vuelve transparente */
     animation: 
         typing 3.5s steps(30) forwards, 
-        blink .7s step-end 6 forwards; /* 6 parpadeos y desaparece */
+        blink .7s step-end 6 forwards; 
     
     text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
-/* IMPORTANTE: Animamos 'max-width' en lugar de 'width' */
-@keyframes typing {
-    from { max-width: 0; }
-    to { max-width: 100ch; } /* Un valor alto para asegurar que quepa todo el texto */
-}
-
-@keyframes blink {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: var(--amarillo-ruta); }
-}
-
 /* Estilo para la frase (p) */
 header p {
-    margin: 20px auto;
+    margin: 20px 0;            /* MODIFICADO: De '20px auto' a '20px 0' */
     font-size: clamp(16px, 4vw, 22px);
     font-style: italic;
     max-width: 700px;
     line-height: 1.5;
+    text-align: left;          /* MODIFICADO: Asegura alineación a la izquierda */
     text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
     
-    /* Animación de aparición suave */
     opacity: 0;
-    animation: fadeIn 1.5s ease-out 3.5s forwards; /* Aparece justo cuando termina el h1 */
+    animation: fadeIn 1.5s ease-out 3.5s forwards;
 }
 
-/* Botón centrado */
+/* Botón también a la izquierda */
 .btn-ruta {
     display: inline-block;
     margin-top: 10px;
+    margin-left: 0;            /* MODIFICADO: Asegura que empiece al inicio */
     padding: 15px 35px;
     background: #ffcc00;
     color: #0d2a71;
@@ -109,26 +97,5 @@ header p {
     border-radius: 50px;
     transition: 0.3s;
     opacity: 0;
-    animation: fadeIn 1.5s ease-out 4s forwards; /* Aparece al final */
-}
-
-.btn-ruta:hover {
-    background: white;
-    transform: translateY(-3px);
-}
-
-/* --- ANIMACIONES --- */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: #ffcc00; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    animation: fadeIn 1.5s ease-out 4s forwards;
 }
