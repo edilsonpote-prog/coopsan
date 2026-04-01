@@ -32,6 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
         btnAudio.innerHTML = "🔇"; // Cambia icono a silenciado
         btnAudio.classList.remove("active");
       }
+      // --- 4. MOVIMIENTO DEL HEADER (Efecto UNEMI) ---
+  const headerContent = document.querySelector('.header-content');
+  
+  if (headerContent) {
+    // Esperamos 6.5 segundos (3.5s de escribir + 3s de pausa)
+    setTimeout(() => {
+      headerContent.classList.add('is-sticky');
+    }, 6500);
+  }
     });
   }
 });
