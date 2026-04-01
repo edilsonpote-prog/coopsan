@@ -4,13 +4,13 @@ header {
     min-height: 450px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;    /* MODIFICADO: De center a flex-start */
-    justify-content: center;   
+    align-items: flex-start !important; /* Forza la alineación a la izquierda */
+    justify-content: center;
     overflow: hidden;
     color: white;
     background: black; 
-    text-align: left;           /* MODIFICADO: De center a left */
-    padding-left: 5%;           /* AÑADIDO: Espacio para que no pegue al borde */
+    text-align: left !important;        /* Forza el texto a la izquierda */
+    padding-left: 50px;                 /* Crea el margen desde el borde izquierdo */
 }
 
 /* El video de fondo se queda igual */
@@ -40,48 +40,27 @@ header::before {
 .header-content {
     position: relative;
     z-index: 2;
-    width: 90%;
+    width: 100%;             /* Asegura que ocupe el ancho disponible */
     max-width: 1200px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;   /* MODIFICADO: Alinea el contenido a la izquierda */
+    align-items: flex-start !important; /* Alinea los hijos a la izquierda */
+    margin: 0 !important;               /* Quita cualquier centrado por margen */
 }
 
 header h1 {
-    font-size: clamp(24px, 8vw, 50px);
-    font-weight: 900;
-    text-transform: uppercase;
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
-    
-    display: block;
-    margin: 0;                 /* MODIFICADO: Quitamos el 'auto' que lo centraba */
+    /* ... mantén tus fuentes y animaciones ... */
+    margin-left: 0 !important;   /* Quita el auto */
+    margin-right: 0 !important;  /* Quita el auto */
+    text-align: left;
     width: fit-content;
-    max-width: 0;        
-    
-    border-right: 4px solid var(--amarillo-ruta);
-    padding-right: 5px; 
-    
-    animation: 
-        typing 3.5s steps(30) forwards, 
-        blink .7s step-end 6 forwards; 
-    
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
-/* Estilo para la frase (p) */
 header p {
-    margin: 20px 0;            /* MODIFICADO: De '20px auto' a '20px 0' */
-    font-size: clamp(16px, 4vw, 22px);
-    font-style: italic;
-    max-width: 700px;
-    line-height: 1.5;
-    text-align: left;          /* MODIFICADO: Asegura alineación a la izquierda */
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
-    
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out 3.5s forwards;
+    /* ... mantén tus fuentes y animaciones ... */
+    margin-left: 0 !important;   /* Quita el auto */
+    margin-right: 0 !important;  /* Quita el auto */
+    text-align: left;            /* Alinea el texto a la izquierda */
 }
 
 /* Botón también a la izquierda */
