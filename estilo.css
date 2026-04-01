@@ -1,4 +1,4 @@
-/* --- CONTENEDOR TIPO BARRA (NAVBAR) --- */
+/* --- CONTENEDOR TIPO BARRA --- */
 .header-content {
     position: fixed; 
     z-index: 1000;
@@ -6,17 +6,15 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    /* Mantenemos alineación al centro al inicio */
+    /* Estado inicial */
     align-items: center; 
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
-    
-    /* Estado inicial: Centro de la pantalla */
     top: 50%;
     transform: translateY(-50%);
 
-    /* Iniciamos la transformación a los 6.5s */
+    /* Sincronización: 6.5s inicia el viaje */
     animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
 }
 
@@ -30,16 +28,15 @@ header h1 {
     width: fit-content;
     max-width: 0;
     border-right: 4px solid #ffcc00;
-    /* Importante: margin: 0 auto para que el centrado sea flexible */
+    /* El margen auto es lo que lo mantiene al centro, debemos cambiarlo en la animación */
     margin: 0 auto; 
 
     animation: 
         typing 3.5s steps(30) forwards, 
         blink .7s step-end 6 forwards,
-        quitarCursor 0.1s forwards 6.5s;
+        quitarCursor 0.5s forwards 6.5s; /* Animación de 0.5s para que no sea brusco */
     
     text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-    transition: all 1.5s ease; /* Suaviza el cambio de tamaño */
 }
 
 header p {
@@ -49,52 +46,34 @@ header p {
     margin: 10px 0;
     opacity: 0;
     animation: fadeIn 1.5s ease-out 3.5s forwards;
-    transition: all 1.5s ease;
 }
 
-/* --- LA CLAVE: DE CENTRO A LOGO SUPERIOR IZQUIERDO --- */
+/* --- LA CLAVE DEL MOVIMIENTO TIPO LOGO --- */
 @keyframes transformarEnHeader {
     0% {
         top: 50%;
         transform: translateY(-50%);
+        align-items: center;
     }
     100% {
         top: 0;
-        transform: translateY(0); /* Pegado arriba */
-        background: rgba(13, 42, 113, 0.95); /* Azul institucional */
-        padding: 10px 25px; /* Reducimos padding para que sea una barra delgada */
-        
-        /* 💡 ESTAS LÍNEAS MUEVEN TODO A LA IZQUIERDA */
+        transform: translateY(0); 
+        background: rgba(13, 42, 113, 0.95); 
+        padding: 10px 40px; 
+        /* 💡 ESTO MUEVE EL CONTENEDOR A LA IZQUIERDA */
         align-items: flex-start; 
-        text-align: left;
-    }
-}
-
-/* --- AJUSTE DE TAMAÑO CUANDO ES BARRA (Opcional pero recomendado) --- */
-/* Esta parte hace que el texto se haga más pequeño al llegar arriba para que parezca un logo */
-@keyframes transformarEnHeader {
-    100% {
-        top: 0;
-        transform: translateY(0);
-        background: rgba(13, 42, 113, 0.98);
-        padding: 12px 30px;
-        align-items: flex-start;
         text-align: left;
         border-bottom: 3px solid #ffcc00;
     }
 }
 
-/* Añade esto para que el H1 se comporte como logo al terminar la animación */
-.header-content {
-    /* ... (resto de tu código) */
-    animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
-}
-
-/* Estilo final de los textos */
+/* --- AJUSTE DEL TÍTULO (Para que deje de ser central) --- */
 @keyframes quitarCursor {
     to { 
         border-right: none; 
-        margin-left: 0; /* Al quitar el margin auto, se pega a la izquierda */
-        font-size: 20px; /* Tamaño tipo "Logo" */
+        /* 💡 ESTO QUITA EL CENTRADO DEL TEXTO */
+        margin-left: 0; 
+        margin-right: auto;
+        font-size: 22px; /* Tamaño de logo arriba */
     }
 }
