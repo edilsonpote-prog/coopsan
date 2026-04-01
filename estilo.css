@@ -76,56 +76,79 @@ header p {
         margin-right: auto;
         font-size: 22px; /* Tamaño de logo arriba */
     }
-}
-/* --- SECCIÓN CONTÁCTANOS --- */
+/* --- SECCIÓN CONTÁCTANOS (ESTILO BARRA MODERNA) --- */
 .contacto-bar {
-    background: var(--azul-coop); /* El azul oscuro que ya usas */
-    color: white;
-    padding: 40px 20px;
+    background: var(--azul-coop); /* Usamos el azul oscuro institucional */
+    color: white; /* 👈 ESTO ARREGLA EL TEXTO GRIS, TODO EN BLANCO */
+    padding: 60px 20px;
     margin-top: 50px;
     border-top: 5px solid var(--amarillo-ruta);
-}
-
-.contacto-container {
-    max-width: 1100px;
-    margin: 0 auto;
+    border-radius: 15px 15px 0 0; /* Un pequeño borde redondeado arriba */
     text-align: center;
 }
 
-.contacto-bar h2 {
-    background: transparent; /* Quitamos el fondo azul del H2 general para esta sección */
-    color: var(--amarillo-ruta);
-    font-size: 28px;
-    margin-bottom: 30px;
+.contacto-container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* El título azul que tienes en la imagen */
+.contacto-bar h2 {
+    background: transparent; /* Quitamos el fondo azul del H2 general para esta sección */
+    color: white; /* Texto del título en blanco para esta sección */
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    display: inline-block;
+    padding: 0; /* Ajustamos padding del H2 original */
+}
+
+/* 💡 ESTE ES EL TRUCO PARA HACER LA BARRA HORIZONTAL */
 .contacto-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* En pantallas grandes: 4 columnas iguales */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
+/* Estilo para cada 'cajita' de contacto */
 .contacto-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Fondo blanco muy clarito para las cajas */
+    padding: 30px;
     border-radius: 12px;
     transition: 0.3s;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centramos iconos y texto */
+    text-align: center;
 }
 
 .contacto-item:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
+/* Estilo para los iconos grandes */
 .contacto-item .icon {
-    font-size: 30px;
-    display: block;
-    margin-bottom: 10px;
+    font-size: 40px; /* Iconos más grandes y blancos */
+    margin-bottom: 15px;
+    color: var(--amarillo-ruta); /* Los iconos los destacamos con amarillo */
 }
 
+/* Texto de la dirección, teléfono, etc. */
 .contacto-item p {
     margin: 0;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.4;
+    color: white; /* 👈 FORZAMOS COLOR BLANCO PARA CADA PÁRRAFO */
+}
+
+/* --- RESPONSIVIDAD (AJUSTE PARA MÓVILES) --- */
+@media (max-width: 768px) {
+    .contacto-grid {
+        grid-template-columns: 1fr; /* En móvil, una columna vertical */
+    }
 }
