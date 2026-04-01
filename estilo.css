@@ -1,6 +1,6 @@
 header {
     position: relative;
-    height: 100vh; /* Cambiado a 100 para que el centro sea el centro real de la pantalla */
+    height: 100vh; 
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -27,24 +27,29 @@ header::before {
     z-index: 1;
 }
 
-/* --- CONTENEDOR CON MOVIMIENTO --- */
+/* --- CONTENEDOR TIPO BARRA (NAVBAR) --- */
 .header-content {
-    position: fixed; /* Lo hacemos fixed desde el inicio para que la animación sea fluida */
-    z-index: 100;
+    position: fixed; 
+    z-index: 1000;
     width: 100%;
+    left: 0; /* Aseguramos que empiece desde el borde */
     display: flex;
     flex-direction: column;
     align-items: center; 
     text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
     
-    /* ANIMACIÓN: 
-       Esperamos 3.5s (escribir) + 3s (pausa) = 6.5s 
-    */
-    animation: moverEsquina 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
+    /* Inicia en el centro exacto */
+    top: 50%;
+    transform: translateY(-50%);
+
+    /* Espera 6.5s (3.5s de escritura + 3s de pausa) */
+    animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
 }
 
 header h1 {
-    font-size: clamp(24px, 6vw, 50px);
+    font-size: clamp(20px, 6vw, 45px);
     font-weight: 900;
     text-transform: uppercase;
     color: white;
@@ -64,29 +69,30 @@ header h1 {
 }
 
 header p {
-    font-size: clamp(16px, 3vw, 22px);
+    font-size: clamp(14px, 3vw, 18px);
     font-style: italic;
     color: white;
-    margin: 15px 0;
+    margin: 10px 0;
     opacity: 0;
     animation: 
         fadeIn 1.5s ease-out 3.5s forwards,
         alinearTexto 0.1s forwards 6.5s;
 }
 
-/* --- ANIMACIONES --- */
-
-@keyframes moverEsquina {
+/* --- LA MAGIA: DE CENTRO A BARRA SUPERIOR --- */
+@keyframes transformarEnHeader {
     0% {
         top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); /* Centrado inicial */
+        transform: translateY(-50%) scale(1);
+        background: transparent;
     }
     100% {
-        top: 20px;
-        left: 20px;
-        transform: translate(0, 0) scale(0.7); /* Esquina superior izquierda y más pequeño */
-        align-items: flex-start;
+        top: 0;
+        transform: translateY(0) scale(0.85); /* Se reduce un poco */
+        background: rgba(13, 42, 113, 0.9); /* Fondo azul semi-transparente como una barra */
+        padding: 10px 40px;
+        align-items: flex-start; /* Todo a la izquierda */
+        border-bottom: 3px solid #ffcc00; /* Línea decorativa amarilla */
     }
 }
 
@@ -112,11 +118,10 @@ header p {
     50% { border-color: transparent; }
 }
 
-/* El botón se oculta o se queda en el centro, tú decides. 
-   Aquí lo movemos con el texto: */
+/* Ajuste del botón para que no estorbe arriba */
 .btn-ruta {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 10px 25px;
     background: #ffcc00;
     color: #0d2a71;
     text-decoration: none;
