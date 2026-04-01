@@ -1,30 +1,21 @@
 header {
     position: relative;
-    height: 80vh; 
-    min-height: 450px;
+    height: 100vh; /* Cambiado a 100 para que el centro sea el centro real de la pantalla */
     display: flex;
     flex-direction: column;
-    /* Empieza centrado */
     align-items: center; 
     justify-content: center;
     overflow: hidden;
-    color: white;
-    background: black; 
-    text-align: center;
+    background: black;
 }
 
-/* El video de fondo se queda igual */
 .video-bg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: 0;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    z-index: 0;
 }
 
 header::before {
@@ -36,34 +27,34 @@ header::before {
     z-index: 1;
 }
 
-/* --- LOGICA DE MOVIMIENTO --- */
+/* --- CONTENEDOR CON MOVIMIENTO --- */
 .header-content {
-    position: relative;
-    z-index: 100; /* Prioridad alta */
-    width: fit-content;
+    position: fixed; /* Lo hacemos fixed desde el inicio para que la animación sea fluida */
+    z-index: 100;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center; 
+    text-align: center;
     
     /* ANIMACIÓN: 
-       Moverse: espera 3.5s (escribir) + 3s (pausa) = 6.5s 
+       Esperamos 3.5s (escribir) + 3s (pausa) = 6.5s 
     */
-    animation: moverEsquina 1.5s ease-in-out 6.5s forwards;
+    animation: moverEsquina 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
 }
 
 header h1 {
-    font-size: clamp(24px, 8vw, 50px);
+    font-size: clamp(24px, 6vw, 50px);
     font-weight: 900;
     text-transform: uppercase;
     color: white;
     white-space: nowrap;
     overflow: hidden;
-    margin: 0;
     width: fit-content;
-    max-width: 0;        
+    max-width: 0;
     border-right: 4px solid #ffcc00;
-    
-    /* Typing y luego cambio de alineación */
+    margin: 0 auto;
+
     animation: 
         typing 3.5s steps(30) forwards, 
         blink .7s step-end 6 forwards,
@@ -73,32 +64,38 @@ header h1 {
 }
 
 header p {
-    margin: 20px 0;
-    font-size: clamp(16px, 4vw, 22px);
+    font-size: clamp(16px, 3vw, 22px);
     font-style: italic;
-    max-width: 700px;
+    color: white;
+    margin: 15px 0;
     opacity: 0;
     animation: 
         fadeIn 1.5s ease-out 3.5s forwards,
         alinearTexto 0.1s forwards 6.5s;
 }
 
-/* --- KEYFRAMES --- */
+/* --- ANIMACIONES --- */
 
-/* Mueve el contenedor a la esquina superior izquierda y lo hace FIXED */
 @keyframes moverEsquina {
-    to {
-        position: fixed;
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centrado inicial */
+    }
+    100% {
         top: 20px;
-        left: 30px;
-        transform: scale(0.7); /* Se hace un poco más pequeño como logo */
+        left: 20px;
+        transform: translate(0, 0) scale(0.7); /* Esquina superior izquierda y más pequeño */
         align-items: flex-start;
     }
 }
 
-/* Cambia el texto de 'centro' a 'izquierda' al mismo tiempo que se mueve */
 @keyframes alinearTexto {
-    to { text-align: left; margin-left: 0; }
+    to { 
+        text-align: left; 
+        margin-left: 0; 
+        margin-right: auto;
+    }
 }
 
 @keyframes typing {
@@ -111,10 +108,14 @@ header p {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* El botón desaparece o se mueve con el grupo */
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* El botón se oculta o se queda en el centro, tú decides. 
+   Aquí lo movemos con el texto: */
 .btn-ruta {
     display: inline-block;
-    margin-top: 10px;
     padding: 12px 30px;
     background: #ffcc00;
     color: #0d2a71;
