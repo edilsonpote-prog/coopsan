@@ -1,32 +1,3 @@
-header {
-    position: relative;
-    height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    overflow: hidden;
-    background: black;
-}
-
-.video-bg {
-    position: absolute;
-    top: 50%; left: 50%;
-    min-width: 100%; min-height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    z-index: 0;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-}
-
 /* --- CONTENEDOR TIPO BARRA (NAVBAR) --- */
 .header-content {
     position: fixed; 
@@ -35,6 +6,7 @@ header::before {
     left: 0;
     display: flex;
     flex-direction: column;
+    /* Mantenemos alineación al centro al inicio */
     align-items: center; 
     text-align: center;
     padding: 20px;
@@ -44,7 +16,7 @@ header::before {
     top: 50%;
     transform: translateY(-50%);
 
-    /* Sincronización: 3.5s escribiendo + 3s pausa = 6.5s para iniciar movimiento */
+    /* Iniciamos la transformación a los 6.5s */
     animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
 }
 
@@ -58,14 +30,16 @@ header h1 {
     width: fit-content;
     max-width: 0;
     border-right: 4px solid #ffcc00;
-    margin: 0 auto;
+    /* Importante: margin: 0 auto para que el centrado sea flexible */
+    margin: 0 auto; 
 
     animation: 
         typing 3.5s steps(30) forwards, 
         blink .7s step-end 6 forwards,
-        quitarCursor 0.1s forwards 6.5s; /* Quitamos el cursor al mover */
+        quitarCursor 0.1s forwards 6.5s;
     
     text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    transition: all 1.5s ease; /* Suaviza el cambio de tamaño */
 }
 
 header p {
@@ -75,55 +49,52 @@ header p {
     margin: 10px 0;
     opacity: 0;
     animation: fadeIn 1.5s ease-out 3.5s forwards;
+    transition: all 1.5s ease;
 }
 
-/* --- LA CLAVE: DE CENTRO A BARRA SUPERIOR --- */
+/* --- LA CLAVE: DE CENTRO A LOGO SUPERIOR IZQUIERDO --- */
 @keyframes transformarEnHeader {
     0% {
         top: 50%;
-        transform: translateY(-50%) scale(1);
+        transform: translateY(-50%);
     }
     100% {
         top: 0;
-        transform: translateY(0) scale(0.8); /* Se reduce un poco para estilo navbar */
-        background: rgba(13, 42, 113, 0.95); /* Azul institucional sólido */
-        padding: 10px 50px;
-        align-items: flex-start; /* Alinea contenido a la izquierda */
+        transform: translateY(0); /* Pegado arriba */
+        background: rgba(13, 42, 113, 0.95); /* Azul institucional */
+        padding: 10px 25px; /* Reducimos padding para que sea una barra delgada */
+        
+        /* 💡 ESTAS LÍNEAS MUEVEN TODO A LA IZQUIERDA */
+        align-items: flex-start; 
+        text-align: left;
+    }
+}
+
+/* --- AJUSTE DE TAMAÑO CUANDO ES BARRA (Opcional pero recomendado) --- */
+/* Esta parte hace que el texto se haga más pequeño al llegar arriba para que parezca un logo */
+@keyframes transformarEnHeader {
+    100% {
+        top: 0;
+        transform: translateY(0);
+        background: rgba(13, 42, 113, 0.98);
+        padding: 12px 30px;
+        align-items: flex-start;
         text-align: left;
         border-bottom: 3px solid #ffcc00;
     }
 }
 
-/* Animaciones de soporte */
+/* Añade esto para que el H1 se comporte como logo al terminar la animación */
+.header-content {
+    /* ... (resto de tu código) */
+    animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
+}
+
+/* Estilo final de los textos */
 @keyframes quitarCursor {
-    to { border-right: none; margin-left: 0; }
-}
-
-@keyframes typing {
-    from { max-width: 0; }
-    to { max-width: 100%; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-/* El botón se queda en el centro original del header o baja con el scroll */
-.btn-ruta {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 30px;
-    background: #ffcc00;
-    color: #0d2a71;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 50px;
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out 4s forwards;
-    z-index: 2;
+    to { 
+        border-right: none; 
+        margin-left: 0; /* Al quitar el margin auto, se pega a la izquierda */
+        font-size: 20px; /* Tamaño tipo "Logo" */
+    }
 }
