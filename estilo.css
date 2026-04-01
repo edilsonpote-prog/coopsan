@@ -77,3 +77,55 @@ header p {
         font-size: 22px; /* Tamaño de logo arriba */
     }
 }
+/* --- SECCIÓN CONTÁCTANOS --- */
+.contacto-bar {
+    background: var(--azul-coop); /* El azul oscuro que ya usas */
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
+    border-top: 5px solid var(--amarillo-ruta);
+}
+
+.contacto-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contacto-bar h2 {
+    background: transparent; /* Quitamos el fondo azul del H2 general para esta sección */
+    color: var(--amarillo-ruta);
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.contacto-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contacto-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.contacto-item .icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contacto-item p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+}
