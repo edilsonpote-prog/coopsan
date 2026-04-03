@@ -1,163 +1,73 @@
-/* --- CONTENEDOR TIPO BARRA --- */
-.header-content {
-    position: fixed; 
-    z-index: 1000;
-    width: 100%;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    /* Estado inicial */
-    align-items: center; 
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-    top: 50%;
-    transform: translateY(-50%);
-
-    /* Sincronización: 6.5s inicia el viaje */
-    animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
-}
-
-header h1 {
-    font-size: clamp(22px, 6vw, 45px);
-    font-weight: 900;
-    text-transform: uppercase;
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
-    width: fit-content;
-    max-width: 0;
-    border-right: 4px solid #ffcc00;
-    /* El margen auto es lo que lo mantiene al centro, debemos cambiarlo en la animación */
-    margin: 0 auto; 
-
-    animation: 
-        typing 3.5s steps(30) forwards, 
-        blink .7s step-end 6 forwards,
-        quitarCursor 0.5s forwards 6.5s; /* Animación de 0.5s para que no sea brusco */
-    
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-}
-
-header p {
-    font-size: clamp(14px, 3vw, 18px);
-    font-style: italic;
-    color: white;
-    margin: 10px 0;
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out 3.5s forwards;
-}
-
-/* --- LA CLAVE DEL MOVIMIENTO TIPO LOGO --- */
-@keyframes transformarEnHeader {
-    0% {
-        top: 50%;
-        transform: translateY(-50%);
-        align-items: center;
-    }
-    100% {
-        top: 0;
-        transform: translateY(0); 
-        background: rgba(13, 42, 113, 0.95); 
-        padding: 10px 40px; 
-        /* 💡 ESTO MUEVE EL CONTENEDOR A LA IZQUIERDA */
-        align-items: flex-start; 
-        text-align: left;
-        border-bottom: 3px solid #ffcc00;
-    }
-}
-
-/* --- AJUSTE DEL TÍTULO (Para que deje de ser central) --- */
+/* --- 1. CORRECCIÓN DE ANIMACIONES (HEADER) --- */
 @keyframes quitarCursor {
     to { 
         border-right: none; 
-        /* 💡 ESTO QUITA EL CENTRADO DEL TEXTO */
         margin-left: 0; 
         margin-right: auto;
-        font-size: 22px; /* Tamaño de logo arriba */
+        font-size: 22px; 
     }
-/* --- SECCIÓN CONTÁCTANOS (ESTILO BARRA MODERNA) --- */
+} /* 👈 Aquí faltaba cerrar esta llave en tu código */
+
+/* --- 2. SECCIÓN CONTÁCTANOS (ESTILO BARRA HORIZONTAL) --- */
 .contacto-bar {
-    background: var(--azul-coop); /* Usamos el azul oscuro institucional */
-    color: white; /* 👈 ESTO ARREGLA EL TEXTO GRIS, TODO EN BLANCO */
+    background: var(--azul-coop); /* Asegúrate que esta variable esté definida, si no usa #0d2a71 */
     padding: 60px 20px;
-    margin-top: 50px;
+    text-align: center;
     border-top: 5px solid var(--amarillo-ruta);
-    border-radius: 15px 15px 0 0; /* Un pequeño borde redondeado arriba */
-    text-align: center;
-}
-
-.contacto-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* El título azul que tienes en la imagen */
-.contacto-bar h2 {
-    background: transparent; /* Quitamos el fondo azul del H2 general para esta sección */
-    color: white; /* Texto del título en blanco para esta sección */
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    display: inline-block;
-    padding: 0; /* Ajustamos padding del H2 original */
-}
-
-/* 💡 ESTE ES EL TRUCO PARA HACER LA BARRA HORIZONTAL */
-.contacto-grid {
-    display: grid;
-    /* En pantallas grandes: 4 columnas iguales */
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-/* --- SECCIÓN CONTÁCTANOS HORIZONTAL --- */
-.contacto-bar {
-    background: var(--azul-coop); /* Fondo azul para resaltar sobre el naranja */
-    padding: 40px 20px;
-    text-align: center;
-    border-top: 4px solid var(--amarillo-ruta);
+    margin-top: 50px;
 }
 
 .contacto-bar h2 {
     color: white;
-    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
 .contacto-grid {
-    display: flex; /* 👈 ESTO LO PONE EN HORIZONTAL */
-    justify-content: center; /* Centra los cuadros */
-    gap: 20px; /* Espacio entre cuadros */
-    flex-wrap: wrap; /* Para que en celulares se pongan uno abajo de otro */
+    display: flex;            /* 👈 Esto los pone en fila horizontal */
+    justify-content: center;   /* Centra los cuadros en la pantalla */
+    gap: 25px;                /* Espacio entre cuadros */
+    flex-wrap: wrap;          /* Si no caben (en celulares), se bajan ordenadamente */
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* --- 3. ESTILO DE LOS CUADROS (ITEMS) --- */
 .contacto-item {
-    background: white; /* Cuadro blanco */
-    padding: 20px;
-    border-radius: 10px;
-    flex: 1; /* Hace que todos los cuadros midan lo mismo */
-    min-width: 200px; /* Evita que se encojan demasiado */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: white;        /* Fondo blanco para que resalte sobre el azul */
+    padding: 30px;
+    border-radius: 15px;
+    flex: 1;                  /* Hace que todos crezcan igual */
+    min-width: 250px;         /* Evita que se hagan muy flacos */
+    max-width: 300px;         /* Evita que se hagan muy anchos */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s;
+    align-items: center;      /* Centra el icono y el texto dentro del cuadro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contacto-item:hover {
-    transform: translateY(-5px); /* Efecto al pasar el mouse */
+    transform: translateY(-10px); /* Efecto de levante al pasar el mouse */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
 }
 
 .contacto-item .icon {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 35px;          /* Icono más grande y visible */
+    margin-bottom: 15px;
+    display: block;
 }
 
 .contacto-item p {
     margin: 0;
-    color: #333;
+    color: #333;              /* Texto oscuro para leer fácil sobre blanco */
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Ajuste para que el footer no se vea afectado */
+footer {
+    clear: both;
 }
