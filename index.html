@@ -19,70 +19,50 @@
             line-height: 1.6;
         }
 
-        /* --- 1. HEADER: VIDEO COMPLETO SIN RECORTES --- */
+        /* --- 1. HEADER: VIDEO A TODO EL ANCHO SIN RECORTES --- */
         header {
             position: relative;
             width: 100%;
             background: #000;
-            display: flex;
-            justify-content: center;
             line-height: 0;
         }
 
         .video-container {
             width: 100%;
             height: auto;
-            overflow: hidden;
         }
 
         header video.background-video {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: contain; /* Asegura que el video salga completo */
+            object-fit: contain; /* */
         }
 
-        /* --- BOTÓN DE AUDIO CORREGIDO Y AGRANDADO --- */
-        #audioToggle {
-            position: fixed; /* Fixed para que siempre sea clicleable */
-            top: 20px;
-            right: 20px;
-            z-index: 9999; /* Por encima de absolutamente todo */
-            background: rgba(13, 42, 113, 0.9);
-            color: white;
-            border: 3px solid var(--amarillo-ruta);
-            border-radius: 50%;
-            width: 70px;  /* Tamaño grande para pulgar */
-            height: 70px;
-            font-size: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
-        }
-
-        #audioToggle:active { transform: scale(0.8); }
-
-        /* --- 2. BARRA STICKY --- */
+        /* --- 2. BARRA AZUL STICKY CON BOTÓN DE AUDIO --- */
         .header-sticky-bar {
             position: -webkit-sticky;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 2000;
             width: 100%;
             background: var(--azul-coop);
-            padding: 15px 40px;
+            padding: 10px 25px;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            justify-content: space-between; /* Texto a la izquierda, botón a la derecha */
+            align-items: center;
             box-sizing: border-box;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 4px solid var(--amarillo-ruta);
+        }
+
+        .text-container {
+            display: flex;
+            flex-direction: column;
         }
 
         .header-sticky-bar h1 {
-            font-size: clamp(18px, 3vw, 26px);
+            font-size: clamp(14px, 4vw, 24px);
             font-weight: 900;
             text-transform: uppercase;
             color: white;
@@ -90,14 +70,33 @@
         }
 
         .header-sticky-bar p {
-            font-size: 14px;
+            font-size: clamp(10px, 2.5vw, 14px);
             font-style: italic;
             color: var(--amarillo-ruta);
             margin: 0;
         }
 
-        /* --- 3. SECCIONES --- */
-        section { padding: 60px 20px; max-width: 1100px; margin: auto; }
+        /* BOTÓN DE AUDIO AGRANDADO EN LA BARRA */
+        #audioToggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid var(--amarillo-ruta);
+            border-radius: 50%;
+            width: 60px; /* Tamaño grande para fácil click */
+            height: 60px;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        #audioToggle:active { transform: scale(0.9); }
+
+        /* --- 3. SECCIONES DE CONTENIDO (TODO RECUPERADO) --- */
+        section { padding: 50px 20px; max-width: 1100px; margin: auto; }
 
         h2 {
             color: white;
@@ -124,7 +123,7 @@
             gap: 20px;
         }
 
-        /* --- 4. CONTACTO --- */
+        /* --- 4. CONTACTO: DISEÑO ORIGINAL DE CUADROS --- */
         .contacto-bar {
             background: var(--azul-coop);
             color: white;
@@ -138,6 +137,8 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .contacto-item {
@@ -147,13 +148,16 @@
             flex: 1;
             min-width: 220px;
             max-width: 280px;
-            color: #333;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: 0.3s;
+            color: #333;
         }
 
-        .contacto-item .icon { font-size: 30px; margin-bottom: 10px; }
+        .contacto-item .icon { font-size: 35px; margin-bottom: 10px; }
+        .contacto-item p { font-weight: bold; margin: 0; font-size: 14px; }
 
         footer {
             background-color: #111;
@@ -165,8 +169,6 @@
 </head>
 <body>
 
-<button id="audioToggle" onclick="toggleMute()">🔇</button>
-
 <header>
     <div class="video-container">
         <video id="videoHero" autoplay muted loop playsinline class="background-video">
@@ -176,8 +178,11 @@
 </header>
 
 <div class="header-sticky-bar">
-    <h1>Cooperativa de Transporte S.A.N</h1>
-    <p>"Conectando vidas, kilómetros y destinos."</p>
+    <div class="text-container">
+        <h1>Cooperativa de Transporte S.A.N</h1>
+        <p>"Conectando vidas, kilómetros y destinos."</p>
+    </div>
+    <button id="audioToggle" onclick="toggleMute()">🔇</button>
 </div>
 
 <section>
@@ -188,7 +193,7 @@
 
     <h2>Nuestra Historia</h2>
     <div class="info-box">
-        <p>Iniciamos con una visión clara: servir al pueblo. Hoy somos una flota moderna gracias a la confianza de nuestros socios.</p>
+        <p>Iniciamos con una visión clara: servir al pueblo. Lo que empezó con una unidad, hoy es una flota moderna gracias a la confianza de nuestros socios y la lealtad de nuestros pasajeros en Naranjal.</p>
     </div>
 </section>
 
@@ -209,19 +214,31 @@
 <section>
     <h2>Nuestro Equipo</h2>
     <div class="grid-layout">
-        <div class="info-box"><p><strong>Gerencia:</strong> Planificación estratégica.</p></div>
-        <div class="info-box"><p><strong>Operaciones:</strong> Control de rutas.</p></div>
-        <div class="info-box"><p><strong>Atención:</strong> Venta de boletos.</p></div>
+        <div class="info-box"><p><strong>Gerencia:</strong> Planificación estratégica y liderazgo.</p></div>
+        <div class="info-box"><p><strong>Operaciones:</strong> Control de rutas y seguridad vial.</p></div>
+        <div class="info-box"><p><strong>Atención al Cliente:</strong> Venta de boletos y soporte técnico.</p></div>
     </div>
 </section>
 
 <section class="contacto-bar">
     <h2 style="background:transparent; color:white;">Contáctanos</h2>
     <div class="contacto-grid">
-        <div class="contacto-item"><span class="icon">📍</span><p>Naranjal, Ecuador</p></div>
-        <div class="contacto-item"><span class="icon">📞</span><p>04-XXXX-XXX</p></div>
-        <div class="contacto-item"><span class="icon">📧</span><p>info@coopsan.com</p></div>
-        <div class="contacto-item"><span class="icon">💬</span><p>WhatsApp: +593 9XXXXXXXX</p></div>
+        <div class="contacto-item">
+            <span class="icon">📍</span>
+            <p>Naranjal, Ecuador</p>
+        </div>
+        <div class="contacto-item">
+            <span class="icon">📞</span>
+            <p>04-XXXX-XXX</p>
+        </div>
+        <div class="contacto-item">
+            <span class="icon">📧</span>
+            <p>info@coopsan.com</p>
+        </div>
+        <div class="contacto-item">
+            <span class="icon">💬</span>
+            <p>WhatsApp: +593 9XXXXXXXX</p>
+        </div>
     </div>
 </section>
 
@@ -231,7 +248,6 @@
 </footer>
 
 <script>
-    // Función para manejar el sonido del video
     function toggleMute() {
         const video = document.getElementById('videoHero');
         const btn = document.getElementById('audioToggle');
@@ -245,10 +261,6 @@
         }
     }
 </script>
-
-</body>
-</html>
-</footer>
 
 </body>
 </html>
