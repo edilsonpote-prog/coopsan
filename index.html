@@ -20,11 +20,11 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER Y EFECTO MOVIMIENTO --- */
+        /* --- 1. HEADER CON VIDEO REDUCIDO --- */
         header {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 60vh; /* Altura reducida para mejor navegación */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -49,50 +49,39 @@
             z-index: 2;
         }
 
+        /* --- 2. ENCABEZADO QUE SE QUEDA ARRIBA (STICKY) --- */
         .header-content {
-            position: fixed;
+            position: sticky; /* Se pega al tope al hacer scroll */
+            top: 0;
             z-index: 1000;
             width: 100%;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
+            background: rgba(13, 42, 113, 0.95); /* Azul Coop con transparencia */
+            padding: 15px 40px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
+            align-items: flex-start;
+            text-align: left;
             box-sizing: border-box;
-            animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.4);
         }
 
-        header h1 {
-            font-size: clamp(24px, 5vw, 50px);
+        header h1, .header-content h1 {
+            font-size: clamp(20px, 4vw, 30px);
             font-weight: 900;
             text-transform: uppercase;
             color: white;
-            white-space: nowrap;
-            overflow: hidden;
-            width: fit-content; 
-            max-width: 0; 
-            border-right: 4px solid var(--amarillo-ruta);
-            margin: 0 auto;
-            animation: 
-                typing 3.5s steps(30) forwards, 
-                blink .7s step-end 6 forwards,
-                quitarCursor 0.5s forwards 6.5s;
-            text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        header p {
-            font-size: clamp(14px, 3vw, 18px);
+        header p, .header-content p {
+            font-size: clamp(12px, 2vw, 16px);
             font-style: italic;
-            color: white;
-            opacity: 0;
-            animation: fadeIn 1.2s ease-out 3.5s forwards;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+            color: var(--amarillo-ruta);
+            margin: 0;
         }
 
-        /* --- SECCIONES GENERALES --- */
+        /* --- SECCIONES --- */
         section { padding: 60px 20px; max-width: 1100px; margin: auto; }
 
         .info-box {
@@ -114,20 +103,17 @@
             font-size: 24px;
         }
 
-        h3 { color: var(--azul-coop); margin-top: 0; }
-
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
-        /* --- BARRA DE CONTACTO (HORIZONTAL) --- */
+        /* --- CONTACTO HORIZONTAL --- */
         .contacto-bar {
             background: var(--azul-coop);
             color: white;
             padding: 60px 20px;
-            max-width: 100%;
             text-align: center;
             border-top: 5px solid var(--amarillo-ruta);
         }
@@ -146,7 +132,7 @@
             padding: 25px;
             border-radius: 15px;
             flex: 1;
-            min-width: 200px;
+            min-width: 220px;
             max-width: 280px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             display: flex;
@@ -167,26 +153,8 @@
             border-top: 5px solid var(--amarillo-ruta);
         }
 
-        /* --- ANIMACIONES --- */
-        @keyframes transformarEnHeader {
-            100% {
-                top: 0;
-                transform: translateY(0);
-                background: rgba(13, 42, 113, 0.95);
-                padding: 10px 40px;
-                align-items: flex-start;
-                text-align: left;
-            }
-        }
-        @keyframes quitarCursor {
-            to { border-right: none; margin-left: 0; margin-right: auto; font-size: 20px; }
-        }
-        @keyframes typing { from { max-width: 0; } to { max-width: 100%; } }
-        @keyframes blink { 50% { border-color: transparent; } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         #audioToggle {
-            position: absolute; top: 20px; right: 20px; z-index: 1001;
+            position: absolute; top: 20px; right: 20px; z-index: 1100;
             background: rgba(0,0,0,0.6); color: white; border: 2px solid white;
             border-radius: 50%; width: 50px; height: 50px; cursor: pointer;
         }
@@ -199,21 +167,22 @@
         <source src="video coop.mp4" type="video/mp4">
     </video>
     <button id="audioToggle">🔇</button>
-    <div class="header-content">
-        <h1>Cooperativa de Transporte S.A.N</h1>
-        <p>"Conectando vidas, kilómetros y destinos."</p>
-    </div>
 </header>
+
+<div class="header-content">
+    <h1>Cooperativa de Transporte S.A.N</h1>
+    <p>"Conectando vidas, kilómetros y destinos."</p>
+</div>
 
 <section>
     <h2>Sobre Nosotros</h2>
     <div class="info-box">
-        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural. Conectamos a Naranjal con los principales puntos estratégicos del Ecuador, garantizando seguridad y puntualidad en cada viaje.</p>
+        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural. Conectamos a Naranjal con los principales puntos estratégicos del Ecuador.</p>
     </div>
 
     <h2>Nuestra Historia</h2>
     <div class="info-box">
-        <p>Iniciamos con una visión clara: servir al pueblo. Lo que empezó con una unidad, hoy es una flota moderna gracias a la confianza de nuestros socios y la lealtad de nuestros pasajeros en Naranjal.</p>
+        <p>Iniciamos con una visión clara: servir al pueblo. Hoy somos una flota moderna gracias a la confianza de nuestros socios.</p>
     </div>
 </section>
 
@@ -222,34 +191,12 @@
     <div class="team-grid">
         <div class="info-box">
             <h3>Misión</h3>
-            <p>Brindar transporte confiable y seguro, conectando familias y negocios con una operación orientada al bienestar del pasajero.</p>
+            <p>Brindar transporte confiable y seguro, orientado al bienestar del pasajero.</p>
         </div>
         <div class="info-box">
             <h3>Visión</h3>
-            <p>Ser la cooperativa referente en el sur del país, innovando en flota y tecnología para la mejor experiencia de viaje.</p>
+            <p>Ser la cooperativa referente en el sur del país, innovando en tecnología.</p>
         </div>
-    </div>
-</section>
-
-<section>
-    <h2>Destinos</h2>
-    <div class="info-box">
-        <ul style="list-style: none; padding: 0;">
-            <li>✅ NARANJAL ↔ DURAN - GUAYAQUIL</li>
-            <li>✅ NARANJAL ↔ MILAGRO</li>
-            <li>✅ GUAYAQUIL - DURAN ↔ NARANJAL</li>
-            <li>✅ MILAGRO ↔ NARANJAL</li>
-            <li>📦 Servicio de Encomiendas</li>
-        </ul>
-    </div>
-</section>
-
-<section>
-    <h2>Nuestro Equipo</h2>
-    <div class="team-grid">
-        <div class="info-box"><strong>Gerencia:</strong> Planificación estratégica y administrativa.</div>
-        <div class="info-box"><strong>Operaciones:</strong> Control de rutas y mantenimiento de flota.</div>
-        <div class="info-box"><strong>Atención:</strong> Venta de boletos y auxilio al pasajero.</div>
     </div>
 </section>
 
@@ -282,6 +229,5 @@
     <p>Copyright &copy; 2026 - Todos los derechos reservados</p>
 </footer>
 
-<script src="modelo.js"></script>
 </body>
 </html>
