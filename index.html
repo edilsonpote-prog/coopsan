@@ -19,37 +19,17 @@
             line-height: 1.6;
         }
 
-        /* --- 1. HEADER: VIDEO A TODO EL ANCHO SIN RECORTES --- */
-        header {
-            position: relative;
-            width: 100%;
-            background: #000;
-            line-height: 0;
-        }
-
-        .video-container {
-            width: 100%;
-            height: auto;
-        }
-
-        header video.background-video {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain; /* */
-        }
-
-        /* --- 2. BARRA AZUL STICKY CON BOTÓN DE AUDIO --- */
+        /* --- 1. LA BARRA AZUL AHORA ES LO PRIMERO (TOP 0) --- */
         .header-sticky-bar {
-            position: -webkit-sticky;
-            position: sticky;
+            position: fixed; /* Fixed para que siempre mande arriba */
             top: 0;
-            z-index: 2000;
+            left: 0;
+            z-index: 3000;
             width: 100%;
             background: var(--azul-coop);
             padding: 10px 25px;
             display: flex;
-            justify-content: space-between; /* Texto a la izquierda, botón a la derecha */
+            justify-content: space-between;
             align-items: center;
             box-sizing: border-box;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -76,15 +56,15 @@
             margin: 0;
         }
 
-        /* BOTÓN DE AUDIO AGRANDADO EN LA BARRA */
+        /* BOTÓN DE AUDIO DENTRO DE LA BARRA */
         #audioToggle {
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 2px solid var(--amarillo-ruta);
             border-radius: 50%;
-            width: 60px; /* Tamaño grande para fácil click */
-            height: 60px;
-            font-size: 28px;
+            width: 55px;
+            height: 55px;
+            font-size: 26px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -95,7 +75,28 @@
 
         #audioToggle:active { transform: scale(0.9); }
 
-        /* --- 3. SECCIONES DE CONTENIDO (TODO RECUPERADO) --- */
+        /* --- 2. VIDEO DEBAJO DE LA BARRA --- */
+        header {
+            position: relative;
+            width: 100%;
+            background: #000;
+            line-height: 0;
+            margin-top: 75px; /* Espacio para que el video no se tape con la barra fija */
+        }
+
+        .video-container {
+            width: 100%;
+            height: auto;
+        }
+
+        header video.background-video {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* --- 3. SECCIONES (TODO RECUPERADO) --- */
         section { padding: 50px 20px; max-width: 1100px; margin: auto; }
 
         h2 {
@@ -123,7 +124,7 @@
             gap: 20px;
         }
 
-        /* --- 4. CONTACTO: DISEÑO ORIGINAL DE CUADROS --- */
+        /* --- 4. CONTACTO --- */
         .contacto-bar {
             background: var(--azul-coop);
             color: white;
@@ -148,16 +149,13 @@
             flex: 1;
             min-width: 220px;
             max-width: 280px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: 0.3s;
-            color: #333;
         }
 
         .contacto-item .icon { font-size: 35px; margin-bottom: 10px; }
-        .contacto-item p { font-weight: bold; margin: 0; font-size: 14px; }
 
         footer {
             background-color: #111;
@@ -169,14 +167,6 @@
 </head>
 <body>
 
-<header>
-    <div class="video-container">
-        <video id="videoHero" autoplay muted loop playsinline class="background-video">
-            <source src="video coop.mp4" type="video/mp4">
-        </video>
-    </div>
-</header>
-
 <div class="header-sticky-bar">
     <div class="text-container">
         <h1>Cooperativa de Transporte S.A.N</h1>
@@ -185,10 +175,18 @@
     <button id="audioToggle" onclick="toggleMute()">🔇</button>
 </div>
 
+<header>
+    <div class="video-container">
+        <video id="videoHero" autoplay muted loop playsinline class="background-video">
+            <source src="video coop.mp4" type="video/mp4">
+        </video>
+    </div>
+</header>
+
 <section>
     <h2>Sobre Nosotros</h2>
     <div class="info-box">
-        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural en Naranjal.</p>
+        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural en Naranjal. Conectamos a Naranjal con los principales destinos garantizando seguridad y confort.</p>
     </div>
 
     <h2>Nuestra Historia</h2>
@@ -223,22 +221,10 @@
 <section class="contacto-bar">
     <h2 style="background:transparent; color:white;">Contáctanos</h2>
     <div class="contacto-grid">
-        <div class="contacto-item">
-            <span class="icon">📍</span>
-            <p>Naranjal, Ecuador</p>
-        </div>
-        <div class="contacto-item">
-            <span class="icon">📞</span>
-            <p>04-XXXX-XXX</p>
-        </div>
-        <div class="contacto-item">
-            <span class="icon">📧</span>
-            <p>info@coopsan.com</p>
-        </div>
-        <div class="contacto-item">
-            <span class="icon">💬</span>
-            <p>WhatsApp: +593 9XXXXXXXX</p>
-        </div>
+        <div class="contacto-item"><span class="icon">📍</span><p>Naranjal, Ecuador</p></div>
+        <div class="contacto-item"><span class="icon">📞</span><p>04-XXXX-XXX</p></div>
+        <div class="contacto-item"><span class="icon">📧</span><p>info@coopsan.com</p></div>
+        <div class="contacto-item"><span class="icon">💬</span><p>WhatsApp: +593 9XXXXXXXX</p></div>
     </div>
 </section>
 
