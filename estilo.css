@@ -111,44 +111,53 @@ header p {
     gap: 20px;
 }
 
-/* Estilo para cada 'cajita' de contacto */
+/* --- SECCIÓN CONTÁCTANOS HORIZONTAL --- */
+.contacto-bar {
+    background: var(--azul-coop); /* Fondo azul para resaltar sobre el naranja */
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 4px solid var(--amarillo-ruta);
+}
+
+.contacto-bar h2 {
+    color: white;
+    margin-bottom: 30px;
+}
+
+.contacto-grid {
+    display: flex; /* 👈 ESTO LO PONE EN HORIZONTAL */
+    justify-content: center; /* Centra los cuadros */
+    gap: 20px; /* Espacio entre cuadros */
+    flex-wrap: wrap; /* Para que en celulares se pongan uno abajo de otro */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .contacto-item {
-    background: rgba(255, 255, 255, 0.1); /* Fondo blanco muy clarito para las cajas */
-    padding: 30px;
-    border-radius: 12px;
-    transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: white; /* Cuadro blanco */
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1; /* Hace que todos los cuadros midan lo mismo */
+    min-width: 200px; /* Evita que se encojan demasiado */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centramos iconos y texto */
-    text-align: center;
+    align-items: center;
+    transition: transform 0.3s;
 }
 
 .contacto-item:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: translateY(-5px); /* Efecto al pasar el mouse */
 }
 
-/* Estilo para los iconos grandes */
 .contacto-item .icon {
-    font-size: 40px; /* Iconos más grandes y blancos */
-    margin-bottom: 15px;
-    color: var(--amarillo-ruta); /* Los iconos los destacamos con amarillo */
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-/* Texto de la dirección, teléfono, etc. */
 .contacto-item p {
     margin: 0;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 1.4;
-    color: white; /* 👈 FORZAMOS COLOR BLANCO PARA CADA PÁRRAFO */
-}
-
-/* --- RESPONSIVIDAD (AJUSTE PARA MÓVILES) --- */
-@media (max-width: 768px) {
-    .contacto-grid {
-        grid-template-columns: 1fr; /* En móvil, una columna vertical */
-    }
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
 }
