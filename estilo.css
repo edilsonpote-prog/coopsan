@@ -1,4 +1,51 @@
-/* --- 1. CORRECCIÓN DE ANIMACIONES (HEADER) --- */
+/* --- 1. CONFIGURACIÓN DEL HEADER (VIDEO REDUCIDO) --- */
+header {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* 👈 Altura reducida para que el contenido suba */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: black; 
+    border-bottom: 4px solid var(--amarillo-ruta);
+}
+
+header video.background-video {
+    position: absolute;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+/* --- 2. CONTENIDO VOLADOR (ESTILO GEMINI) --- */
+.header-content {
+    position: absolute; /* 👈 Cambiado a absolute para que respete el 60vh del header */
+    z-index: 1000;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
+}
+
+/* --- 3. ANIMACIONES Y CURSOR --- */
 @keyframes quitarCursor {
     to { 
         border-right: none; 
@@ -6,15 +53,27 @@
         margin-right: auto;
         font-size: 22px; 
     }
-} /* 👈 Aquí faltaba cerrar esta llave en tu código */
+}
 
-/* --- 2. SECCIÓN CONTÁCTANOS (ESTILO BARRA HORIZONTAL) --- */
+@keyframes transformarEnHeader {
+    100% {
+        top: 0;
+        transform: translateY(0);
+        background: rgba(13, 42, 113, 0.95);
+        padding: 10px 40px;
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+/* --- 4. SECCIÓN CONTÁCTANOS (BARRA HORIZONTAL) --- */
 .contacto-bar {
-    background: var(--azul-coop); /* Asegúrate que esta variable esté definida, si no usa #0d2a71 */
+    background: var(--azul-coop);
     padding: 60px 20px;
     text-align: center;
     border-top: 5px solid var(--amarillo-ruta);
     margin-top: 50px;
+    clear: both;
 }
 
 .contacto-bar h2 {
@@ -25,49 +84,48 @@
 }
 
 .contacto-grid {
-    display: flex;            /* 👈 Esto los pone en fila horizontal */
-    justify-content: center;   /* Centra los cuadros en la pantalla */
-    gap: 25px;                /* Espacio entre cuadros */
-    flex-wrap: wrap;          /* Si no caben (en celulares), se bajan ordenadamente */
+    display: flex;            /* 👈 Fila horizontal */
+    justify-content: center;   /* Centrado de cuadros */
+    gap: 25px;
+    flex-wrap: wrap;          /* Ajuste para móviles */
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* --- 3. ESTILO DE LOS CUADROS (ITEMS) --- */
 .contacto-item {
-    background: white;        /* Fondo blanco para que resalte sobre el azul */
+    background: white;        /* Cuadro blanco para legibilidad */
     padding: 30px;
     border-radius: 15px;
-    flex: 1;                  /* Hace que todos crezcan igual */
-    min-width: 250px;         /* Evita que se hagan muy flacos */
-    max-width: 300px;         /* Evita que se hagan muy anchos */
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
-    align-items: center;      /* Centra el icono y el texto dentro del cuadro */
+    align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contacto-item:hover {
-    transform: translateY(-10px); /* Efecto de levante al pasar el mouse */
+    transform: translateY(-10px);
     box-shadow: 0 12px 25px rgba(0,0,0,0.3);
 }
 
 .contacto-item .icon {
-    font-size: 35px;          /* Icono más grande y visible */
+    font-size: 35px;
     margin-bottom: 15px;
     display: block;
 }
 
 .contacto-item p {
     margin: 0;
-    color: #333;              /* Texto oscuro para leer fácil sobre blanco */
+    color: #333;              /* Texto oscuro sobre blanco */
     font-weight: bold;
     font-size: 15px;
     line-height: 1.4;
 }
 
-/* Ajuste para que el footer no se vea afectado */
 footer {
     clear: both;
+    padding: 40px 20px;
 }
