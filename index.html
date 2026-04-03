@@ -20,31 +20,25 @@
             overflow-x: hidden;
         }
 
-        /* 🎬 HEADER CON VIDEO DE FONDO */
+        /* 🎬 HEADER Y EFECTO GEMINI */
         header {
             position: relative;
             width: 100%;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             overflow: hidden;
             background: black; 
         }
 
         header video.background-video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 1;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
             transform: translate(-50%, -50%);
             object-fit: cover;
+            z-index: 1;
         }
 
         header::before {
@@ -56,98 +50,49 @@
         }
 
         .header-content {
-            position: relative;
-            z-index: 3;
-            color: white;
-            padding: 20px;
-            width: 90%;
-            max-width: 1200px;
+            position: fixed; /* Para que vuele arriba */
+            z-index: 1000;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Animación de desplazamiento a la esquina */
+            animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
         }
 
-        /* ✍️ TÍTULO CORREGIDO (Blanco y Cursor Pegado) */
         header h1 {
             font-size: clamp(28px, 6vw, 55px);
             font-weight: 900;
             text-transform: uppercase;
-            color: white; /* Color blanco corregido */
+            color: white;
             white-space: nowrap;
             overflow: hidden;
-            
-            /* Control del cursor */
-            display: block;
-            margin: 0 auto;
             width: fit-content; 
             max-width: 0; 
             border-right: 4px solid var(--amarillo-ruta);
-            padding-right: 8px;
-
-            /* Animación: Escribe y el cursor desaparece al final */
+            margin: 0 auto;
             animation: 
                 typing 3.5s steps(30) forwards, 
-                blink .7s step-end 6 forwards; 
-            
+                blink .7s step-end 6 forwards,
+                quitarCursor 0.5s forwards 6.5s;
             text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
         }
 
         header p {
-            font-size: clamp(16px, 4vw, 22px);
-            margin: 20px auto;
-            max-width: 800px;
+            font-size: clamp(14px, 3vw, 18px);
             font-style: italic;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+            color: white;
             opacity: 0;
             animation: fadeIn 1.2s ease-out 3.5s forwards;
         }
 
-        /* 🔊 BOTÓN DE AUDIO */
-        #audioToggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 55px; height: 55px;
-            cursor: pointer;
-            font-size: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
-
-        #audioToggle.active {
-            background: var(--naranja-coop);
-            box-shadow: 0 0 15px var(--naranja-coop);
-        }
-
-        /* 🚍 BOTÓN DE ACCIÓN */
-        .btn-ruta {
-            margin-top: 15px;
-            padding: 15px 40px;
-            background: var(--amarillo-ruta);
-            color: var(--azul-coop);
-            border-radius: 50px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            opacity: 0;
-            animation: fadeIn 1.2s ease-out 4s forwards;
-        }
-
-        .btn-ruta:hover {
-            background: white;
-            transform: translateY(-3px);
-        }
-
-        /* 🟦 SECCIONES */
+        /* 🟦 SECCIONES GENERALES */
         section { padding: 70px 20px; max-width: 1100px; margin: auto; }
 
         .info-box {
@@ -174,29 +119,80 @@
             gap: 20px;
         }
 
-        /* 🟠 FOOTER ÚNICO */
-        footer {
-            background-color: #111;
-            color: #fff;
-            padding: 50px 20px;
+        /* 📱 CONTACTO BARRA HORIZONTAL */
+        .contacto-bar {
+            background: var(--azul-coop);
+            color: white;
+            padding: 60px 20px;
+            max-width: 100%;
             text-align: center;
             border-top: 5px solid var(--amarillo-ruta);
         }
 
-        /* 🔄 ANIMACIONES ACTUALIZADAS */
-        @keyframes typing {
-            from { max-width: 0; }
-            to { max-width: 100%; }
+        .contacto-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        @keyframes blink {
-            0%, 100% { border-color: transparent; }
-            50% { border-color: var(--amarillo-ruta); }
+        .contacto-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        .contacto-item:hover { transform: translateY(-10px); }
+        .contacto-item .icon { font-size: 30px; margin-bottom: 10px; }
+        .contacto-item p { color: #333; font-weight: bold; margin: 0; font-size: 14px; }
+
+        footer {
+            background-color: #111;
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid var(--amarillo-ruta);
+        }
+
+        /* 🔄 KEYFRAMES */
+        @keyframes transformarEnHeader {
+            100% {
+                top: 0;
+                transform: translateY(0);
+                background: rgba(13, 42, 113, 0.95);
+                padding: 10px 40px;
+                align-items: flex-start;
+                text-align: left;
+            }
+        }
+
+        @keyframes quitarCursor {
+            to { 
+                border-right: none; 
+                margin-left: 0;
+                margin-right: auto;
+                font-size: 22px; 
+            }
+        }
+
+        @keyframes typing { from { max-width: 0; } to { max-width: 100%; } }
+        @keyframes blink { 50% { border-color: transparent; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #audioToggle {
+            position: absolute; top: 20px; right: 20px; z-index: 1001;
+            background: rgba(0,0,0,0.6); color: white; border: 2px solid white;
+            border-radius: 50%; width: 50px; height: 50px; cursor: pointer;
         }
     </style>
 </head>
@@ -206,92 +202,28 @@
     <video autoplay muted loop playsinline class="background-video" id="videoFondo">
         <source src="video coop.mp4" type="video/mp4">
     </video>
-
     <button id="audioToggle">🔇</button>
-
     <div class="header-content">
         <h1>Cooperativa de Transporte S.A.N</h1>
-        <p>"Conectando vidas, kilómetros y destinos desde nuestros inicios."</p>
+        <p>"Conectando vidas, kilómetros y destinos."</p>
     </div>
 </header>
 
 <section>
     <h2>Sobre Nosotros</h2>
     <div class="info-box">
-        <p>La <strong>Cooperativa de Transporte S.A.N</strong> es una organización líder en el transporte interprovincial y rural. Conectamos a Naranjal con los principales puntos estratégicos del Ecuador, garantizando seguridad y puntualidad en cada viaje.</p>
-    </div>
-
-    <h2>Nuestra Historia</h2>
-    <div class="info-box">
-        <p>Iniciamos con una visión clara: servir al pueblo. Lo que empezó con una unidad, hoy es una flota moderna gracias a la confianza de nuestros socios y la lealtad de nuestros pasajeros en Naranjal.</p>
-    </div>
-</section>
-
-<section style="background: rgba(255,255,255,0.1); border-radius: 30px; margin-bottom: 40px;">
-    <h2>Misión y Visión</h2>
-    <div class="team-grid">
-        <div class="info-box">
-            <h3>Misión</h3>
-            <p>Brindar transporte confiable y seguro, conectando familias y negocios con una operación orientada al bienestar del pasajero.</p>
-        </div>
-        <div class="info-box">
-            <h3>Visión</h3>
-            <p>Ser la cooperativa referente en el sur del país, innovando en flota y tecnología para la mejor experiencia de viaje.</p>
-        </div>
-    </div>
-</section>
-
-<section>
-    <h2>Destinos</h2>
-    <div class="info-box">
-        <ul>
-            <li>NARANJAL ↔ DURAN - GUAYAQUIL: <strong></strong></li>
-            <li>NARANJAL ↔ MILAGRO: <strong></strong></li>
-            <li>GUAYAQUIL - DURAN ↔ NARANJAL: <strong></strong></li>
-            <li>MILAGRO ↔ NARANJAL: <strong></strong></li>
-            <li>Encomiendas: <strong></strong></li>
-        </ul>
+        <p>La <strong>Cooperativa de Transporte S.A.N</strong> garantiza seguridad y puntualidad en cada viaje desde Naranjal.</p>
     </div>
 </section>
 
 <section>
     <h2>Nuestro Equipo</h2>
     <div class="team-grid">
-        <div class="info-box"><strong>Gerencia:</strong> Planificación estratégica y administrativa.</div>
-        <div class="info-box"><strong>Operaciones:</strong> Control de rutas y mantenimiento de flota.</div>
-        <div class="info-box"><strong>Atención:</strong> Venta de boletos y auxilio al pasajero.</div>
-    </div>
-<section class="contacto-bar">
-    <div class="contacto-container">
-        <h2>Contáctanos</h2>
-        <div class="contacto-grid">
-            <div class="contacto-item">
-                <span class="icon">📍</span>
-                <p>Naranjal, Ecuador</p>
-            </div>
-            <div class="contacto-item">
-                <span class="icon">📞</span>
-                <p>04-XXXX-XXX</p>
-            </div>
-            <div class="contacto-item">
-                <span class="icon">📧</span>
-                <p>info@coopsan.com</p>
-            </div>
-            <div class="contacto-item">
-                <span class="icon">💬</span>
-                <p>WhatsApp: +593 9XXXXXXXX</p>
-            </div>
-        </div>
+        <div class="info-box"><strong>Gerencia:</strong> Planificación estratégica.</div>
+        <div class="info-box"><strong>Operaciones:</strong> Control de rutas.</div>
+        <div class="info-box"><strong>Atención:</strong> Venta de boletos.</div>
     </div>
 </section>
-<footer>
-    <p><strong>Cooperativa de Transporte S.A.N</strong><br>
-   Naranjal - Ecuador</p>
-    <p>Copyright &copy; 2026 - Todos los derechos reservados</p>
-</footer>
 
-<div id="footer-container"></div>
-
-<script src="modelo.js"></script>
-</body>
-</html>
+<section class="contacto-bar">
+    <div class="contacto-container">
