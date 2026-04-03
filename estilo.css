@@ -1,14 +1,13 @@
-/* --- 1. CONFIGURACIÓN DEL HEADER (VIDEO REDUCIDO) --- */
+/* --- 1. CONFIGURACIÓN DEL HEADER (VIDEO AL 60%) --- */
 header {
     position: relative;
     width: 100%;
-    height: 60vh; /* 👈 Altura reducida para que el contenido suba */
+    height: 60vh; /* Altura reducida para evitar scroll infinito */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background: black; 
-    border-bottom: 4px solid var(--amarillo-ruta);
 }
 
 header video.background-video {
@@ -20,32 +19,24 @@ header video.background-video {
     z-index: 1;
 }
 
-header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2;
-}
-
-/* --- 2. CONTENIDO VOLADOR (ESTILO GEMINI) --- */
+/* --- 2. TÍTULO QUE SE PEGA ARRIBA (STICKY) --- */
 .header-content {
-    position: absolute; /* 👈 Cambiado a absolute para que respete el 60vh del header */
+    position: -webkit-sticky;
+    position: sticky; 
+    top: 0; 
     z-index: 1000;
     width: 100%;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    background: var(--azul-coop); /* Fondo azul sólido al bajar */
+    padding: 15px 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+    align-items: flex-start; /* Alineado a la izquierda como la imagen */
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     box-sizing: border-box;
-    animation: transformarEnHeader 1.5s cubic-bezier(0.4, 0, 0.2, 1) 6.5s forwards;
 }
 
-/* --- 3. ANIMACIONES Y CURSOR --- */
+/* --- 3. CORRECCIÓN DE ANIMACIONES (HEADER) --- */
 @keyframes quitarCursor {
     to { 
         border-right: none; 
@@ -55,18 +46,23 @@ header::before {
     }
 }
 
-@keyframes transformarEnHeader {
-    100% {
-        top: 0;
-        transform: translateY(0);
-        background: rgba(13, 42, 113, 0.95);
-        padding: 10px 40px;
-        align-items: flex-start;
-        text-align: left;
-    }
+.header-content h1 {
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+    margin: 0;
+    animation: quitarCursor 0.5s forwards 6.5s;
 }
 
-/* --- 4. SECCIÓN CONTÁCTANOS (BARRA HORIZONTAL) --- */
+.header-content p {
+    font-size: 14px;
+    font-style: italic;
+    color: white;
+    margin: 5px 0 0 0;
+}
+
+/* --- 4. SECCIÓN CONTÁCTANOS (ESTILO BARRA HORIZONTAL) --- */
 .contacto-bar {
     background: var(--azul-coop);
     padding: 60px 20px;
@@ -77,23 +73,26 @@ header::before {
 }
 
 .contacto-bar h2 {
-    color: white;
+    color: white !important;
+    background: transparent !important;
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 40px;
+    display: block;
 }
 
 .contacto-grid {
-    display: flex;            /* 👈 Fila horizontal */
-    justify-content: center;   /* Centrado de cuadros */
+    display: flex;            /* Pone los cuadros en fila */
+    justify-content: center;   /* Centra los cuadros */
     gap: 25px;
-    flex-wrap: wrap;          /* Ajuste para móviles */
+    flex-wrap: wrap;          /* Ajuste para celulares */
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* --- 5. ESTILO DE LOS CUADROS (ITEMS) --- */
 .contacto-item {
-    background: white;        /* Cuadro blanco para legibilidad */
+    background: white;        /* Fondo blanco para resaltar */
     padding: 30px;
     border-radius: 15px;
     flex: 1;
@@ -119,13 +118,17 @@ header::before {
 
 .contacto-item p {
     margin: 0;
-    color: #333;              /* Texto oscuro sobre blanco */
+    color: #333;
     font-weight: bold;
     font-size: 15px;
     line-height: 1.4;
 }
 
+/* Evitar conflictos con el footer */
 footer {
     clear: both;
-    padding: 40px 20px;
+    background-color: #111;
+    color: #fff;
+    padding: 40px;
+    text-align: center;
 }
