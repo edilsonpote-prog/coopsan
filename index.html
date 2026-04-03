@@ -19,36 +19,32 @@
             line-height: 1.6;
         }
 
-        /* --- 1. HEADER CON VIDEO (60x80 aprox) --- */
+        /* --- 1. HEADER: VIDEO COMPLETO SIN RECORTES --- */
         header {
             position: relative;
             width: 100%;
-            padding: 30px 0;
+            background: #1a1a1a;
             display: flex;
-            align-items: center;
             justify-content: center;
-            background: #1a1a1a; /* Fondo neutro para el video */
         }
 
         .video-container {
-            position: relative;
-            /* Proporción 80% de ancho y 60% de alto de la pantalla */
-            width: 80vw;  
-            height: 60vh; 
-            max-width: 1000px; /* Límite para que no se vea gigante en PC */
+            width: 100%;
+            height: auto;
+            max-height: 80vh; /* Para que no sea eterno en pantallas grandes */
             overflow: hidden;
-            border-radius: 15px;
-            border: 4px solid var(--amarillo-ruta);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            line-height: 0; /* Quita espacios fantasma debajo del video */
         }
 
         header video.background-video {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cambia a "contain" si quieres ver el video 100% original sin recortes */
+            height: auto;
+            display: block;
+            /* "contain" para que el video se vea 100% completo siempre */
+            object-fit: contain; 
         }
 
-        /* --- 2. BARRA STICKY (SOLO UNA) --- */
+        /* --- 2. BARRA STICKY (ÚNICA) --- */
         .header-sticky-bar {
             position: -webkit-sticky;
             position: sticky;
@@ -65,7 +61,7 @@
         }
 
         .header-sticky-bar h1 {
-            font-size: clamp(18px, 3vw, 24px);
+            font-size: clamp(18px, 3vw, 26px);
             font-weight: 900;
             text-transform: uppercase;
             color: white;
@@ -79,8 +75,18 @@
             margin: 0;
         }
 
-        /* --- SECCIONES DE CONTENIDO --- */
-        section { padding: 50px 20px; max-width: 1100px; margin: auto; }
+        /* --- 3. SECCIONES RECUPERADAS --- */
+        section { padding: 60px 20px; max-width: 1100px; margin: auto; }
+
+        h2 {
+            color: white;
+            background: var(--azul-coop);
+            padding: 10px 25px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
 
         .info-box {
             background: white;
@@ -91,16 +97,14 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            color: white;
-            background: var(--azul-coop);
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 20px;
+        /* Diseño de Cuadrículas para Misión/Visión y Equipo */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        /* --- CONTACTO --- */
+        /* --- 4. CONTACTO (DISEÑO ORIGINAL DE CUADROS) --- */
         .contacto-bar {
             background: var(--azul-coop);
             color: white;
@@ -114,21 +118,41 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .contacto-item {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            min-width: 200px;
-            color: #333;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 25px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 220px;
+            max-width: 280px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
         }
 
+        .contacto-item:hover { transform: translateY(-10px); }
+        .contacto-item .icon { font-size: 30px; margin-bottom: 10px; }
+        .contacto-item p { color: #333; font-weight: bold; margin: 0; font-size: 14px; }
+
+        /* Botón de Audio */
         #audioToggle {
             position: absolute; top: 15px; right: 15px; z-index: 1100;
             background: rgba(0,0,0,0.5); color: white; border: 1px solid white;
             border-radius: 50%; width: 40px; height: 40px; cursor: pointer;
+        }
+
+        footer {
+            background-color: #111;
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid var(--amarillo-ruta);
         }
     </style>
 </head>
@@ -160,17 +184,60 @@
     </div>
 </section>
 
+<section style="background: rgba(255,255,255,0.1); border-radius: 30px; margin-bottom: 40px;">
+    <h2>Misión y Visión</h2>
+    <div class="grid-layout">
+        <div class="info-box">
+            <h3>Misión</h3>
+            <p>Brindar transporte confiable y seguro, orientado al bienestar del pasajero.</p>
+        </div>
+        <div class="info-box">
+            <h3>Visión</h3>
+            <p>Ser la cooperativa referente en el sur del país, innovando en tecnología.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Nuestro Equipo</h2>
+    <div class="grid-layout">
+        <div class="info-box">
+            <p><strong>Gerencia:</strong> Planificación estratégica.</p>
+        </div>
+        <div class="info-box">
+            <p><strong>Operaciones:</strong> Control de rutas.</p>
+        </div>
+        <div class="info-box">
+            <p><strong>Atención:</strong> Venta de boletos.</p>
+        </div>
+    </div>
+</section>
+
 <section class="contacto-bar">
-    <h2>Contáctanos</h2>
+    <h2 style="background:transparent; color:white;">Contáctanos</h2>
     <div class="contacto-grid">
-        <div class="contacto-item">📍 Naranjal, Ecuador</div>
-        <div class="contacto-item">📞 04-XXXX-XXX</div>
-        <div class="contacto-item">📧 info@coopsan.com</div>
+        <div class="contacto-item">
+            <span class="icon">📍</span>
+            <p>Naranjal, Ecuador</p>
+        </div>
+        <div class="contacto-item">
+            <span class="icon">📞</span>
+            <p>04-XXXX-XXX</p>
+        </div>
+        <div class="contacto-item">
+            <span class="icon">📧</span>
+            <p>info@coopsan.com</p>
+        </div>
+        <div class="contacto-item">
+            <span class="icon">💬</span>
+            <p>WhatsApp: +593 9XXXXXXXX</p>
+        </div>
     </div>
 </section>
 
 <footer>
-    <p>© 2026 Cooperativa de Transporte S.A.N</p>
+    <p><strong>Cooperativa de Transporte S.A.N</strong> - Naranjal, Ecuador</p>
+    <p>Copyright &copy; 2026 - Todos los derechos reservados</p>
 </footer>
 
 </body>
