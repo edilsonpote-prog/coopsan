@@ -23,28 +23,49 @@
         header {
             position: relative;
             width: 100%;
-            background: #1a1a1a;
+            background: #000;
             display: flex;
             justify-content: center;
+            line-height: 0;
         }
 
         .video-container {
             width: 100%;
             height: auto;
-            max-height: 80vh; /* Para que no sea eterno en pantallas grandes */
             overflow: hidden;
-            line-height: 0; /* Quita espacios fantasma debajo del video */
         }
 
         header video.background-video {
             width: 100%;
             height: auto;
             display: block;
-            /* "contain" para que el video se vea 100% completo siempre */
-            object-fit: contain; 
+            object-fit: contain; /* Asegura que el video salga completo */
         }
 
-        /* --- 2. BARRA STICKY (ÚNICA) --- */
+        /* --- BOTÓN DE AUDIO CORREGIDO Y AGRANDADO --- */
+        #audioToggle {
+            position: fixed; /* Fixed para que siempre sea clicleable */
+            top: 20px;
+            right: 20px;
+            z-index: 9999; /* Por encima de absolutamente todo */
+            background: rgba(13, 42, 113, 0.9);
+            color: white;
+            border: 3px solid var(--amarillo-ruta);
+            border-radius: 50%;
+            width: 70px;  /* Tamaño grande para pulgar */
+            height: 70px;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        #audioToggle:active { transform: scale(0.8); }
+
+        /* --- 2. BARRA STICKY --- */
         .header-sticky-bar {
             position: -webkit-sticky;
             position: sticky;
@@ -75,7 +96,7 @@
             margin: 0;
         }
 
-        /* --- 3. SECCIONES RECUPERADAS --- */
+        /* --- 3. SECCIONES --- */
         section { padding: 60px 20px; max-width: 1100px; margin: auto; }
 
         h2 {
@@ -97,14 +118,13 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* Diseño de Cuadrículas para Misión/Visión y Equipo */
         .grid-layout {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
-        /* --- 4. CONTACTO (DISEÑO ORIGINAL DE CUADROS) --- */
+        /* --- 4. CONTACTO --- */
         .contacto-bar {
             background: var(--azul-coop);
             color: white;
@@ -118,8 +138,6 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .contacto-item {
@@ -129,42 +147,32 @@
             flex: 1;
             min-width: 220px;
             max-width: 280px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: 0.3s;
         }
 
-        .contacto-item:hover { transform: translateY(-10px); }
         .contacto-item .icon { font-size: 30px; margin-bottom: 10px; }
-        .contacto-item p { color: #333; font-weight: bold; margin: 0; font-size: 14px; }
-
-        /* Botón de Audio */
-        #audioToggle {
-            position: absolute; top: 15px; right: 15px; z-index: 1100;
-            background: rgba(0,0,0,0.5); color: white; border: 1px solid white;
-            border-radius: 50%; width: 40px; height: 40px; cursor: pointer;
-        }
 
         footer {
             background-color: #111;
             color: #fff;
             padding: 40px;
             text-align: center;
-            border-top: 5px solid var(--amarillo-ruta);
         }
     </style>
 </head>
 <body>
 
+<button id="audioToggle" onclick="toggleMute()">🔇</button>
+
 <header>
     <div class="video-container">
-        <video autoplay muted loop playsinline class="background-video">
+        <video id="videoHero" autoplay muted loop playsinline class="background-video">
             <source src="video coop.mp4" type="video/mp4">
         </video>
     </div>
-    <button id="audioToggle">🔇</button>
 </header>
 
 <div class="header-sticky-bar">
@@ -201,43 +209,45 @@
 <section>
     <h2>Nuestro Equipo</h2>
     <div class="grid-layout">
-        <div class="info-box">
-            <p><strong>Gerencia:</strong> Planificación estratégica.</p>
-        </div>
-        <div class="info-box">
-            <p><strong>Operaciones:</strong> Control de rutas.</p>
-        </div>
-        <div class="info-box">
-            <p><strong>Atención:</strong> Venta de boletos.</p>
-        </div>
+        <div class="info-box"><p><strong>Gerencia:</strong> Planificación estratégica.</p></div>
+        <div class="info-box"><p><strong>Operaciones:</strong> Control de rutas.</p></div>
+        <div class="info-box"><p><strong>Atención:</strong> Venta de boletos.</p></div>
     </div>
 </section>
 
 <section class="contacto-bar">
     <h2 style="background:transparent; color:white;">Contáctanos</h2>
     <div class="contacto-grid">
-        <div class="contacto-item">
-            <span class="icon">📍</span>
-            <p>Naranjal, Ecuador</p>
-        </div>
-        <div class="contacto-item">
-            <span class="icon">📞</span>
-            <p>04-XXXX-XXX</p>
-        </div>
-        <div class="contacto-item">
-            <span class="icon">📧</span>
-            <p>info@coopsan.com</p>
-        </div>
-        <div class="contacto-item">
-            <span class="icon">💬</span>
-            <p>WhatsApp: +593 9XXXXXXXX</p>
-        </div>
+        <div class="contacto-item"><span class="icon">📍</span><p>Naranjal, Ecuador</p></div>
+        <div class="contacto-item"><span class="icon">📞</span><p>04-XXXX-XXX</p></div>
+        <div class="contacto-item"><span class="icon">📧</span><p>info@coopsan.com</p></div>
+        <div class="contacto-item"><span class="icon">💬</span><p>WhatsApp: +593 9XXXXXXXX</p></div>
     </div>
 </section>
 
 <footer>
     <p><strong>Cooperativa de Transporte S.A.N</strong> - Naranjal, Ecuador</p>
     <p>Copyright &copy; 2026 - Todos los derechos reservados</p>
+</footer>
+
+<script>
+    // Función para manejar el sonido del video
+    function toggleMute() {
+        const video = document.getElementById('videoHero');
+        const btn = document.getElementById('audioToggle');
+        
+        if (video.muted) {
+            video.muted = false;
+            btn.innerHTML = "🔊";
+        } else {
+            video.muted = true;
+            btn.innerHTML = "🔇";
+        }
+    }
+</script>
+
+</body>
+</html>
 </footer>
 
 </body>
